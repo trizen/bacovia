@@ -1,0 +1,37 @@
+#!/usr/bin/ruby
+
+# Daniel "Trizen" Șuteu
+# License: GPLv3
+# Date: 26 February 2017
+# https://github.com/trizen
+
+# A symbolic math library for Sidef.
+
+class Bacovia()            {}
+class Power()    < Bacovia {}
+class Fraction() < Bacovia {}
+class Sum()      < Bacovia {}
+class Product()  < Bacovia {}
+class Log()      < Bacovia {}
+class Exp()      < Bacovia {}
+class Symbol()   < Bacovia {}
+
+include("bacovia/*.sf")
+
+class Bacovia {
+
+    #const I = Exp(Fraction(1, 2) * Log(-1))
+    const I = Power(-1, Fraction(1, 2))
+
+    method sin {
+        Fraction(Exp(I * self) - Exp(-I * self), (2*I))
+    }
+
+    method cos {
+        Fraction(Exp(-I * self) + Exp(I * self), 2)
+    }
+
+    method i {
+        Product(I, self)
+    }
+}

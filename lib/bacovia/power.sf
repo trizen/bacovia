@@ -1,0 +1,75 @@
+#!/usr/bin/ruby
+
+class Power(v, n) {
+
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method **(Number o) {
+        Power(v, n * o)
+    }
+
+    method **(Fraction o) {
+        Power(v, n * o)
+    }
+
+    method ==(Power o) {
+        (v == o.v) &&
+        (n == o.n)
+    }
+
+    method /(Power o) {
+        #~ if (o.v == v) {
+            #~ Power(v, n - o.n)
+        #~ }
+        #~ else {
+            Product(self, o.inv)
+        #~ }
+    }
+
+    method /(Object o) {
+        Product(self, o.inv)
+    }
+
+    method *(Power o) {
+        #~ if (o.v == v) {
+            #~ Power(v, n + o.n)
+        #~ }
+        #~ else {
+            Product(self, o)
+        #~ }
+    }
+
+    method *(Object o) {
+        Product(self, o)
+    }
+
+    method ==(_) {
+        false
+    }
+
+    method inv {
+        Power(v, n.neg)
+    }
+
+    method neg {
+        Product(-1, self)
+    }
+
+    method simplify {
+        Power(v.simplify, n.simplify)
+    }
+
+    method numeric {
+        v.numeric ** n.numeric
+    }
+
+    method to_s {
+        "Power(#{v}, #{n})"
+    }
+}

@@ -1,0 +1,77 @@
+#!/usr/bin/ruby
+
+class Product(*values) {
+    method *(Product o) {
+        Product(values..., o.values...)
+    }
+
+    method /(Product o) {
+        Product(values..., o.values.map{.inv}...)
+    }
+
+    method /(Object o) {
+        var copy = [values...]
+        #~ if (copy.remove_first(o)) {
+            #~ Product(copy...)
+        #~ }
+        #~ else {
+            Product(copy..., o.inv)
+        #~ }
+    }
+
+    method *(Object o) {
+        var copy = [values...]
+        #~ if (copy.remove_first(o.inv)) {
+            #~ Product(copy...)
+        #~ }
+        #~ else {
+            Product(copy..., o)
+        #~ }
+    }
+
+    method **(Object o) {
+        Product(values.map{ _ ** o }...)
+    }
+
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method neg {
+        if (values) {
+            Product(values[0].neg, values.ft(1)...)
+        }
+        else {
+            Product(-1)
+        }
+    }
+
+    method simplify {
+        var simple = values.map { .simplify }
+        var types = simple.map{ .ref }.uniq
+        var arr = (
+            gather {
+                for type in types {
+                    take(simple.grep { .kind_of(type) }.reduce('*'))
+                }
+            }
+        )
+        arr.len == 1 ? arr[0] : arr.reduce('*')
+    }
+
+    method inv {
+        Product(values.map { .inv }...)
+    }
+
+    method numeric {
+        values.map { .numeric }.prod
+    }
+
+    method to_s {
+        "Product(#{values.join(', ')})"
+    }
+}

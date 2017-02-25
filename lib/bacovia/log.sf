@@ -1,0 +1,60 @@
+#!/usr/bin/ruby
+
+class Log(v) {
+    method *(Object o) {
+        #Fraction(self, o.inv)
+        Product(self, o)
+        #Log(Power(v, o))
+        #o * self
+    }
+
+    method /(Object o) {
+        #Fraction(self, o)
+        o.inv * self
+        #Product(self, o.inv)
+        #Log(Power(v, o.inv))
+    }
+
+    method +(Log o) {
+        Log(v * o.v)
+    }
+
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Log o) {
+        Log(v / o.v)
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method inv {
+        Fraction(1, self)
+    }
+
+    method neg {
+        Product(-1, self)
+    }
+
+    method simplify {
+        var simple = v.simplify
+
+        if (simple.kind_of(Exp)) {
+            simple.v
+        }
+        else {
+            Log(simple)
+        }
+    }
+
+    method numeric {
+        v.numeric.log
+    }
+
+    method to_s {
+        "Log(#{v})"
+    }
+}

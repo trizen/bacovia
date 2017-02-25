@@ -1,0 +1,47 @@
+#!/usr/bin/ruby
+
+class Symbol(name) {
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method *(Object o) {
+        Product(self, o)
+    }
+
+    method /(Object o) {
+        Product(self, o.inv)
+    }
+
+    method **(Object o) {
+        Power(self, o)
+    }
+
+    method neg {
+        Product(-1, self)
+    }
+
+    method inv {
+        Fraction(1, self)
+    }
+
+    method simplify {
+        self
+    }
+
+    method ==(Symbol o) {
+        name == o.name
+    }
+
+    method ==(_) {
+        false
+    }
+
+    method to_s {
+        "Symbol('#{name}')"
+    }
+}

@@ -1,0 +1,76 @@
+#!/usr/bin/ruby
+
+class Sum(*values) {
+    method -(Sum o) {
+        Sum(values..., o.values.map{.neg}...)
+    }
+
+    method -(Object o) {
+        var copy = [values...]
+        #~ if (copy.remove_first(o)) {
+            #~ Sum(copy...)
+        #~ }
+        #~ else {
+            Sum(copy..., o.neg)
+        #~ }
+    }
+
+    method +(Sum o) {
+        Sum(values..., o.values...)
+    }
+
+    method +(Object o) {
+        var copy = [values...]
+        #~ if (copy.remove_first(o.neg)) {
+            #~ Sum(copy...)
+        #~ }
+        #~ else {
+            Sum(copy..., o)
+        #~ }
+    }
+
+    #~ method *(Sum o) {
+        #~ var terms = []
+        #~ for i,j in (values ~X o.values) {
+            #~ terms << i*j
+        #~ }
+        #~ Sum(terms...)
+    #~ }
+
+    method *(Object o) {
+        Sum(values.map { _ * o }...)
+    }
+
+    method /(Object o) {
+        Sum(values.map { _ / o }...)
+    }
+
+    method simplify {
+        var simple = values.map { .simplify }
+        var types = simple.map{ .ref }.uniq
+        var arr = (
+            gather {
+                for type in types {
+                    take(simple.grep { .kind_of(type) }.reduce('+'))
+                }
+            }
+        )
+        arr.len == 1 ? arr[0] : arr.reduce('+')
+    }
+
+    method inv {
+        Fraction(1, self)
+    }
+
+    method neg {
+        Sum(values.map{.neg}...)
+    }
+
+    method numeric {
+        values.map { .numeric }.sum
+    }
+
+    method to_s {
+        "Sum(#{values.join(', ')})"
+    }
+}

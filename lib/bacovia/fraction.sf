@@ -1,0 +1,100 @@
+#!/usr/bin/ruby
+
+class Fraction(num, den) {
+
+    method +(Number o) {
+        self + Fraction(o, 1)
+    }
+
+    method +(Fraction o) {
+        Fraction(
+            num*o.den + o.num*den,
+            den*o.den
+        )
+    }
+
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Number o) {
+        self + o.neg
+    }
+
+    method -(Fraction o) {
+        self + o.neg
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method *(Number o) {
+        Fraction(num*o, den)
+    }
+
+    method *(Fraction o) {
+        Fraction(num*o.num, den*o.den)
+    }
+
+    method *(Object o) {
+        Product(self, o)
+    }
+
+    method /(Number o) {
+        Fraction(
+            num,
+            den * o
+        )
+    }
+
+    method /(Fraction o) {
+        Fraction(
+            num * o.den,
+            den * o.num,
+        )
+    }
+
+    method /(Object o) {
+        Product(self, o.inv)
+    }
+
+    method **(Number o) {
+        if (o < 0) {
+            var a = o.abs
+            Fraction(den**a, num**a)
+        }
+        else {
+            Fraction(num**o, den**o)
+        }
+    }
+
+    method ==(Fraction o) {
+        (o.num == num) &&
+        (o.den == den)
+    }
+
+    method ==(_) {
+        false
+    }
+
+    method inv {
+        Fraction(den, num)
+    }
+
+    method neg {
+        Fraction(num.neg, den)
+    }
+
+    method simplify {
+        Fraction(num.simplify, den.simplify)
+    }
+
+    method numeric {
+        num.numeric / den.numeric
+    }
+
+    method to_s {
+        "Fraction(#{num}, #{den})"
+    }
+}
