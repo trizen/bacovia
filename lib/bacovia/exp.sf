@@ -53,6 +53,10 @@ class Exp(v) {
         }
     }
 
+    method inv {
+        Exp(v.neg)
+    }
+
     method neg {
         Product(-1, self)
     }
