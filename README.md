@@ -2,27 +2,6 @@
 
 A symbolic math library for Sidef.
 
-# DESCRIPTION
-
-It supports a variety of types, such as:
-
-* Symbol
-    - e.g.: `Symbol(name)`
-* Fraction
-    - e.g.: `Fraction(numerator, denominator)`
-* Power
-    - e.g.: `Power(base, power)`
-* Log
-    - e.g.: `Log(x)`
-* Exp
-    - e.g.: `Exp(x)`
-* Sum
-    - e.g.: `Sum(a, b, c)`
-* Product
-    - e.g.: `Product(a, b, c)`
-
-Each type communicates with all the other types recursively.
-
 # EXAMPLE
 
 ```ruby
@@ -64,6 +43,27 @@ for n in (0..3) {
 say prod                    #=> Product(Fraction(1, 1), Exp(Fraction(1, 1)), Exp(Fraction(1, 1)), Exp(Fraction(1, 2)), Exp(Fraction(1, 6)))
 say prod.numeric            #=> 14.39191609514989
 ```
+
+# DESCRIPTION
+
+As shown in the above example, it supports a variety of types, which described bellow:
+
+* Symbol
+    - symbolic value: `Symbol(name)`
+* Fraction
+    - symbolic fraction: `Fraction(numerator, denominator)`
+* Power
+    - symbolic exponentiation: `Power(base, power)`
+* Log
+    - symbolic natural logarithm: `Log(x)`
+* Exp
+    - symbolic natural exponentiation: `Exp(x)`
+* Sum
+    - symbolic sum: `Sum(a, b, c)`
+* Product
+    - symbolic product: `Product(a, b, c)`
+
+Each type communicates with all the other types recursively.
 
 # REQUIREMENTS
 
