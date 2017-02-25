@@ -1,6 +1,6 @@
 # Bacovia
 
-A new symbolic math library for Sidef.
+A symbolic math library for Sidef.
 
 # DESCRIPTION
 
