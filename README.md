@@ -8,22 +8,16 @@ It supports a variety of types, such as:
 
 * Symbol
     - e.g.: `Symbol(name)`
-
 * Fraction
     - e.g.: `Fraction(numerator, denominator)`
-
 * Power
     - e.g.: `Power(base, power)`
-
 * Log
     - e.g.: `Log(x)`
-
 * Exp
     - e.g.: `Exp(x)`
-
 * Sum
     - e.g.: `Sum(a, b, c)`
-
 * Product
     - e.g.: `Product(a, b, c)`
 
