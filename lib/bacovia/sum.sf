@@ -45,17 +45,12 @@ class Sum(*values) {
         Sum(values.map { _ / o }...)
     }
 
-    method simplify {
-        var simple = values.map { .simplify }
-        var types = simple.map{ .ref }.uniq
-        var arr = (
-            gather {
-                for type in types {
-                    take(simple.grep { .kind_of(type) }.reduce('+'))
-                }
+    method alternatives {
+        gather {
+            values.map{.alternatives}.cartesian { |v|
+                take(v.reduce('+'))
             }
-        )
-        arr.len == 1 ? arr[0] : arr.reduce('+')
+        }.uniq_by { .to_s }
     }
 
     method inv {

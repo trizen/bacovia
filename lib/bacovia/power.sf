@@ -61,8 +61,14 @@ class Power(v, n) {
         Product(-1, self)
     }
 
-    method simplify {
-        Power(v.simplify, n.simplify)
+    method alternatives {
+        gather {
+            for a,b in (v.alternatives ~X n.alternatives) {
+                take(Exp(Log(a) * b))
+                take(Power(a, b))
+                take(a ** b)
+            }
+        }.uniq_by { .to_s }
     }
 
     method numeric {

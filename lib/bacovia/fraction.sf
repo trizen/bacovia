@@ -86,8 +86,13 @@ class Fraction(num, den) {
         Fraction(num.neg, den)
     }
 
-    method simplify {
-        Fraction(num.simplify, den.simplify)
+    method alternatives {
+        gather {
+            for a,b in (num.alternatives ~X den.alternatives) {
+                take(a/b)
+                take(Fraction(a, b))
+            }
+        }.uniq_by { .to_s }
     }
 
     method numeric {

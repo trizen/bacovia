@@ -123,8 +123,8 @@ class Number {
         Fraction(1, self)
     }
 
-    method simplify {
-        self
+    method alternatives {
+        [self]
     }
 
     method numeric {

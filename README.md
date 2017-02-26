@@ -46,7 +46,7 @@ say prod.numeric            #=> 14.39191609514989
 
 # DESCRIPTION
 
-As shown in the above example, it supports a variety of types, which described bellow:
+As shown in the above example, it supports a variety of types, which are described bellow:
 
 * Symbol
     - symbolic value: `Symbol(name)`
@@ -64,6 +64,9 @@ As shown in the above example, it supports a variety of types, which described b
     - symbolic product: `Product(a, b, c)`
 
 Each type communicates with all the other types recursively.
+
+Additionally, the library has built-in support for alternative representations (by calling the method `.alternative`),
+which uses common mathematical identities to symbolically create equivalent expressions from the original one given.
 
 # REQUIREMENTS
 

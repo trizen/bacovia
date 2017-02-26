@@ -29,28 +29,23 @@ class Exp(v) {
         Exp(v * o)
     }
 
-    method simplify {
-        var simple = v.simplify
-        given() {
-            case (simple.kind_of(Log)) {
-                simple.v
-            }
-            case (simple.kind_of(Product) && (simple.values.len == 2)) {
-                var (a, b) = simple.values...
-                if (a.class == :Log) {
-                    Power(a.v, b)
-                }
-                elsif (b.class == :Log) {
-                    Power(b.v, a)
-                }
-                else {
-                    continue
+    method alternatives {
+        gather {
+            for a in (v.alternatives) {
+                take(Exp(a))
+
+                # exp(log(a) * b) = a^b
+                if (a.kind_of(Product) && (a.values.len == 2)) {
+                    var (x, y) = a.values...
+                    if (x.class == :Log) {
+                        take(Power(x.v, y).alternatives...)
+                    }
+                    elsif(y.class == :Log) {
+                        take(Power(y.v, x).alternatives...)
+                    }
                 }
             }
-            default {
-                Exp(simple)
-            }
-        }
+        }.uniq_by { .to_s }
     }
 
     method inv {

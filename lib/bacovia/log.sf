@@ -39,15 +39,16 @@ class Log(v) {
         Product(-1, self)
     }
 
-    method simplify {
-        var simple = v.simplify
+    method alternatives {
+        gather {
+            for a in (v.alternatives) {
+                take(Log(a))
 
-        if (simple.kind_of(Exp)) {
-            simple.v
-        }
-        else {
-            Log(simple)
-        }
+                if (a.kind_of(Exp)) {
+                    take(a.v)
+                }
+            }
+        }.uniq_by { .to_s }
     }
 
     method numeric {

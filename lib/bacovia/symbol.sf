@@ -29,8 +29,8 @@ class Symbol(name) {
         Fraction(1, self)
     }
 
-    method simplify {
-        self
+    method alternatives {
+        [self]
     }
 
     method ==(Symbol o) {
