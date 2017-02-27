@@ -2,18 +2,6 @@
 
 class Symbol(name) {
 
-    method neg {
-        Product(-1, self)
-    }
-
-    method inv {
-        Fraction(1, self)
-    }
-
-    method alternatives {
-        [self]
-    }
-
     method ==(Symbol o) {
         name == o.name
     }

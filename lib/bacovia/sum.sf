@@ -61,10 +61,6 @@ class Sum(*values) {
         false
     }
 
-    method inv {
-        Fraction(1, self)
-    }
-
     method neg {
         Sum(values.map{.neg}...)
     }

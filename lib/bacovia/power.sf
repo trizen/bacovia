@@ -39,10 +39,6 @@ class Power(v, n) {
         Power(v, n.neg)
     }
 
-    method neg {
-        Product(-1, self)
-    }
-
     method alternatives {
         gather {
             for a,b in (v.alternatives ~X n.alternatives) {
