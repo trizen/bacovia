@@ -69,8 +69,8 @@ As shown in the above example, it supports a variety of types, which are describ
 
 Each type communicates with all the other types recursively.
 
-Additionally, the library has built-in support for alternative representations (by calling the method `.alternative`),
-which uses common mathematical identities to symbolically create equivalent expressions from the original one given.
+This library also has built-in support for alternative representations (provided by the method `.alternative`),
+which uses common mathematical identities to symbolically create equivalent expressions from the self-expression.
 
 # REQUIREMENTS
 
