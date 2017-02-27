@@ -52,31 +52,31 @@ Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3,
 
 The types support by this library are described bellow:
 
-* Symbol(name)
+#### `Symbol(name)`
 
 Represents a symbolic value.
 
-* Fraction(numerator, denominator)
+#### `Fraction(numerator, denominator)`
 
 Represents a symbolic fraction.
 
-* Power(base, power)
+#### `Power(base, power)`
 
 Represents symbolic exponentiation in a symbolic base.
 
-* Log(x)
+#### `Log(x)`
 
 Represents the natural logarithm of a symbolic value.
 
-* Exp(x)
+#### `Exp(x)`
 
 Represents the natural exponentiation of a symbolic value.
 
-* Sum(a, b, c, ...)
+#### `Sum(a, b, c, ...)`
 
 Represents a symbolic summation of an arbitrary (finite) number of values.
 
-* Product(a, b, c, ...)
+#### `Product(a, b, c, ...)`
 
 Represents a symbolic product of an arbitrary (finite) number of values.
 
@@ -87,7 +87,7 @@ which uses common mathematical identities to symbolically create equivalent expr
 
 Bellow we describe the special methods provided by this library:
 
-* `.alternatives()`
+#### `.alternatives()`
 
 Returns an array with alternative representations of the self-expression.
     
@@ -103,7 +103,7 @@ Power(3, 2)
 9
 ```
     
-* `.simplify()`
+#### `.simplify()`
 
 Returns a simplification of the self-expression.
 
@@ -117,7 +117,7 @@ Output:
 Symbol('x')
 ```
 
-* `.pretty()`
+#### `.pretty()`
 
 Returns a human-readable stringification of the self-expression.
 
