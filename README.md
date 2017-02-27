@@ -74,11 +74,11 @@ Represents the natural exponentiation of a symbolic value.
 
 #### # `Sum(a, b, c, ...)`
 
-Represents a symbolic summation of an arbitrary (finite) number of values.
+Represents a summation of an arbitrary (finite) number of symbolic values.
 
 #### # `Product(a, b, c, ...)`
 
-Represents a symbolic product of an arbitrary (finite) number of values.
+Represents a product of an arbitrary (finite) number of symbolic values.
 
 # SPECIAL METHODS
 
