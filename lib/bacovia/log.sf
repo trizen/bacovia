@@ -38,6 +38,10 @@ class Log(v) {
         v.numeric.log
     }
 
+    method pretty {
+        "log(#{v.pretty})"
+    }
+
     method to_s {
         "Log(#{v})"
     }

@@ -51,6 +51,10 @@ class Exp(v) {
         v.numeric.exp
     }
 
+    method pretty {
+        "exp(#{v.pretty})"
+    }
+
     method to_s {
         "Exp(#{v})"
     }

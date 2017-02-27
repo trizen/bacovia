@@ -74,6 +74,10 @@ class Product(*values) {
         values.map { .numeric }.prod
     }
 
+    method pretty {
+        '(' + values.map{.pretty}.join(' * ') + ')'
+    }
+
     method to_s {
         "Product(#{values.join(', ')})"
     }

@@ -67,6 +67,10 @@ class Power(v, n) {
         v.numeric ** n.numeric
     }
 
+    method pretty {
+        "#{v.pretty}^#{n.pretty}"
+    }
+
     method to_s {
         "Power(#{v}, #{n})"
     }

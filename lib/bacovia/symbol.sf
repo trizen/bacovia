@@ -22,6 +22,10 @@ class Symbol(name) {
         false
     }
 
+    method pretty {
+        "#{name}"
+    }
+
     method to_s {
         "Symbol('#{name}')"
     }

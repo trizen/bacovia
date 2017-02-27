@@ -101,6 +101,10 @@ class Fraction(num, den) {
         num.numeric / den.numeric
     }
 
+    method pretty {
+        "#{num.pretty}/#{den.pretty}"
+    }
+
     method to_s {
         "Fraction(#{num}, #{den})"
     }

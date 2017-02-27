@@ -159,4 +159,8 @@ class Number {
     method numeric {
         self
     }
+
+    method pretty {
+        ["#{self}", self.as_rat].min_by { .len }
+    }
 }

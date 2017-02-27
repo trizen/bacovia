@@ -156,6 +156,10 @@ class Complex {
         [self]
     }
 
+    method pretty {
+        "#{self}"
+    }
+
     method numeric {
         self
     }

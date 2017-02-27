@@ -73,6 +73,10 @@ class Sum(*values) {
         values.map { .numeric }.sum
     }
 
+    method pretty {
+        '(' + values.map{.pretty}.join(' + ') + ')'
+    }
+
     method to_s {
         "Sum(#{values.join(', ')})"
     }

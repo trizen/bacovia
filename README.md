@@ -69,8 +69,57 @@ As shown in the above example, it supports a variety of types, which are describ
 
 Each type communicates with all the other types recursively.
 
-This library also has built-in support for alternative representations (provided by the method `.alternative`),
+The library also has built-in support for alternative representations (provided by the method `.alternatives`),
 which uses common mathematical identities to symbolically create equivalent expressions from the self-expression.
+
+# SPECIAL METHODS
+
+The special methods provided by this library:
+
+* `.alternatives()`
+    - returns an array with alternative representations of the self-expression.
+* `.simplify()`
+    - returns a simplification of the self-expression.
+* `.pretty()`
+    - returns a human-readable stringification of the self-expression.
+
+
+Example for `.alternatives()`:
+
+```ruby
+Exp(Log(3) * 2).alternatives.each { .say }
+```
+
+Output:
+
+```ruby
+Exp(Product(Log(3), 2))
+Power(3, 2)
+9
+```
+
+Example for `.simplify()`:
+
+```ruby
+say Log(Log(Log(Exp(Exp(Exp(Symbol('x'))))))).simplify
+```
+
+Output:
+
+```ruby
+Symbol('x')
+```
+
+Example for `.pretty()`:
+
+```ruby
+say Power(3, Log(Fraction(1, 2))).pretty
+```
+
+Output:
+```ruby
+say 3^log(1/2)
+```
 
 # REQUIREMENTS
 

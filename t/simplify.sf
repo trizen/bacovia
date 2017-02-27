@@ -1,0 +1,34 @@
+#!/usr/bin/ruby
+
+include('../lib/bacovia.sf')
+
+var a = cos(Log(Symbol('x'))).simplify
+var b = sin(Log(Symbol('x'))).simplify
+
+assert_eq(a, Fraction(Sum(Power(Symbol('x'), -1i), Power(Symbol('x'), 1i)), 2))
+assert_eq(b, Fraction(Sum(Power(Symbol('x'), 1i), Product(Power(Symbol('x'), -1i), -1)), 2i))
+
+assert_eq(a.pretty, '(x^-i + x^i)/2')
+assert_eq(b.pretty, '(x^i + (x^-i * -1))/2i')
+
+var c = simplify(Exp(Log(Symbol('x')) * Exp(Symbol('y'))))
+assert_eq(c, Power(Symbol('x'), Exp(Symbol('y'))))
+assert_eq(c.pretty, 'x^exp(y)')
+
+var d = simplify(Exp(Log(Symbol('x')) * Log(Symbol('y'))))
+assert_eq(d, Power(Symbol('x'), Log(Symbol('y'))))
+assert_eq(d.pretty, 'x^log(y)')
+
+var e = simplify(Exp(Log(Symbol('x')) * Symbol('y')))
+assert_eq(e, Power(Symbol('x'), Symbol('y')))
+assert_eq(e.pretty, 'x^y')
+
+var f = simplify(Exp(Log(Symbol('x')) * -Log(Symbol('y'))))
+assert_eq(f, Power(Symbol('x'), -Log(Symbol('y'))))
+assert_eq(f.pretty, 'x^log(1/y)')
+
+var f = simplify(Exp(Log(Symbol('x')) * -Exp(Symbol('y'))))
+assert_eq(f, Power(Symbol('x'), Product(Exp(Symbol('y')), -1)))
+assert_eq(f.pretty, 'x^(exp(y) * -1)')  # this may change in the future
+
+say "** Test passed!"

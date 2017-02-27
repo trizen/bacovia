@@ -68,7 +68,7 @@ class Bacovia {
     method simplify {
         self.alternatives.min_by { |e|
             e.kind_of(Number) ? -1 : (
-                e.kind_of(Complex) ? 0 : e.to_s.len
+                e.kind_of(Complex) ? 0 : e.pretty.len
             )
         }
     }
