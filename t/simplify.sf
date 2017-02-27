@@ -33,4 +33,8 @@ assert_eq(f.pretty, 'x^(exp(y) * -1)')  # this may change in the future
 
 assert_eq(Power(3, Fraction(1, 2)).pretty, '3^(1/2)')
 
+assert_eq(Fraction(Fraction(2, 3), Fraction(4, 5)) -> pretty, '(2 * 5)/(3 * 4)')
+assert_eq(Fraction(Fraction(2, 3), Symbol('x'))    -> pretty, '2/(3 * x)')
+assert_eq(Fraction(Symbol('x'), Fraction(2, 3))    -> pretty, '(x * 3)/2')
+
 say "** Test passed!"
