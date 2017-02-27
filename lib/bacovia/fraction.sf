@@ -87,7 +87,7 @@ class Fraction(num, den) {
         gather {
             for a,b in (num.alternatives ~X den.alternatives) {
                 take(a/b)
-                #take(Fraction(a, b))
+                take(Fraction(a, b))
                 #take(Product(a, Exp(Log(b).neg)).alternatives...)
 
                 if (b == 1) {
