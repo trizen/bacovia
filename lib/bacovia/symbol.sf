@@ -1,25 +1,6 @@
 #!/usr/bin/ruby
 
 class Symbol(name) {
-    method +(Object o) {
-        Sum(self, o)
-    }
-
-    method -(Object o) {
-        Sum(self, o.neg)
-    }
-
-    method *(Object o) {
-        Product(self, o)
-    }
-
-    method /(Object o) {
-        Product(self, o.inv)
-    }
-
-    method **(Object o) {
-        Power(self, o)
-    }
 
     method neg {
         Product(-1, self)

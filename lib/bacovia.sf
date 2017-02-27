@@ -31,6 +31,48 @@ class Bacovia {
         Fraction(Exp(-I * self) + Exp(I * self), 2)
     }
 
+    method +(Object o) {
+        Sum(self, o)
+    }
+
+    method -(Object o) {
+        Sum(self, o.neg)
+    }
+
+    method *(Object o) {
+        #Product(self, o)
+        Fraction(self, o.inv)
+    }
+
+    method /(Object o) {
+        #Product(self, o.inv)
+        Fraction(self, o)
+    }
+
+    method neg {
+        Product(-1, self)
+    }
+
+    method inv {
+        Fraction(1, self)
+    }
+
+    method **(Object o) {
+        Power(self, o)
+    }
+
+    method alternatives {
+        [self]
+    }
+
+    method simplify {
+        self.alternatives.min_by { |e|
+            e.kind_of(Number) ? -1 : (
+                e.kind_of(Complex) ? 0 : e.to_s.len
+            )
+        }
+    }
+
     method i {
         Product(I, self)
     }

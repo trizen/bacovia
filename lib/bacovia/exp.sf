@@ -14,15 +14,8 @@ class Exp(v) {
     }
 
     method /(Object o) {
-        o.inv * self
-    }
-
-    method +(Object o) {
-        Sum(self, o)
-    }
-
-    method -(Object o) {
-        Sum(self, o.neg)
+        #o.inv * self
+        Fraction(self, o)
     }
 
     method **(Object o) {
@@ -34,7 +27,7 @@ class Exp(v) {
             for a in (v.alternatives) {
                 take(Exp(a))
 
-                # exp(log(a) * b) = a^b
+                # Identity: exp(log(a) * b) = a^b
                 if (a.kind_of(Product) && (a.values.len == 2)) {
                     var (x, y) = a.values...
                     if (x.class == :Log) {

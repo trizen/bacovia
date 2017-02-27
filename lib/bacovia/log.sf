@@ -1,19 +1,6 @@
 #!/usr/bin/ruby
 
 class Log(v) {
-    method *(Object o) {
-        #Fraction(self, o.inv)
-        Product(self, o)
-        #Log(Power(v, o))
-        #o * self
-    }
-
-    method /(Object o) {
-        #Fraction(self, o)
-        o.inv * self
-        #Product(self, o.inv)
-        #Log(Power(v, o.inv))
-    }
 
     method +(Log o) {
         Log(v * o.v)

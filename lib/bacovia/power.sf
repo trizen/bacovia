@@ -2,20 +2,16 @@
 
 class Power(v, n) {
 
-    method +(Object o) {
-        Sum(self, o)
-    }
-
-    method -(Object o) {
-        Sum(self, o.neg)
-    }
-
     method **(Number o) {
         Power(v, n * o)
     }
 
     method **(Fraction o) {
         Power(v, n * o)
+    }
+
+    method **(Object o) {
+        Power(self, o)
     }
 
     method ==(Power o) {
@@ -28,12 +24,14 @@ class Power(v, n) {
             #~ Power(v, n - o.n)
         #~ }
         #~ else {
-            Product(self, o.inv)
+            #~ Product(self, o.inv)
         #~ }
+        Fraction(self, o)
     }
 
     method /(Object o) {
-        Product(self, o.inv)
+        #Product(self, o.inv)
+        Fraction(self, o)
     }
 
     method *(Power o) {
@@ -67,6 +65,11 @@ class Power(v, n) {
                 take(Exp(Log(a) * b))
                 take(Power(a, b))
                 take(a ** b)
+
+                # Identity: 1^x = 1
+                if (a == 1) {
+                    take(1)
+                }
             }
         }.uniq_by { .to_s }
     }

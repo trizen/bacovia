@@ -43,6 +43,7 @@ for n in (0..3) {
 say prod                    #=> Product(Fraction(1, 1), Exp(Fraction(1, 1)), Exp(Fraction(1, 1)), Exp(Fraction(1, 2)), Exp(Fraction(1, 6)))
 say prod.numeric            #=> 14.39191609514989
 
+
 say "\n=> Alternative representations:"
 Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3, 5), 243]
 ```
