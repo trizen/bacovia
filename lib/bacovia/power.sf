@@ -68,7 +68,7 @@ class Power(v, n) {
     }
 
     method pretty {
-        "#{v.pretty}^#{n.pretty}"
+        n.kind_of(Fraction) ?  "#{v.pretty}^(#{n.pretty})" : "#{v.pretty}^#{n.pretty}"
     }
 
     method to_s {

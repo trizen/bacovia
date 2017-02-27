@@ -31,4 +31,6 @@ var f = simplify(Exp(Log(Symbol('x')) * -Exp(Symbol('y'))))
 assert_eq(f, Power(Symbol('x'), Product(Exp(Symbol('y')), -1)))
 assert_eq(f.pretty, 'x^(exp(y) * -1)')  # this may change in the future
 
+assert_eq(Power(3, Fraction(1, 2)).pretty, '3^(1/2)')
+
 say "** Test passed!"
