@@ -10,7 +10,7 @@ include('lib/bacovia.sf')
 var x = Symbol('x')
 var y = Symbol('y')
 
-say x+y               #=> Sum(Symbol('x'), Symbol('x'))
+say x+y               #=> Sum(Symbol('x'), Symbol('y'))
 say x-y               #=> Sum(Symbol('x'), Product(-1, Symbol('y')))
 say x*y               #=> Product(Symbol('x'), Symbol('y'))
 say x/y               #=> Product(Symbol('x'), Fraction(1, Symbol('y')))

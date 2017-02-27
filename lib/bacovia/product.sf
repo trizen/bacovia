@@ -58,6 +58,14 @@ class Product(*values) {
         }.uniq_by { .to_s }
     }
 
+    method ==(Product o) {
+        values == o.values
+    }
+
+    method ==(_) {
+        false
+    }
+
     method inv {
         Product(values.map { .inv }...)
     }

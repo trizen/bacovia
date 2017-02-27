@@ -1,0 +1,29 @@
+#!/usr/bin/ruby
+
+include('../lib/bacovia.sf')
+
+var a = Power(3, 5)
+var e = Exp(5)
+var l = Log(2)
+var f = Fraction(13, 17)
+var p = Product(3, 4, 5)
+var s = Sum(3, 4, 5)
+
+assert_eq(a**a, Power(3, Product(Power(3, 5), 5)))
+assert_eq(e**e, Exp(Product(Exp(5), 5)))
+assert_eq(l**l, Power(l, l))
+assert_eq(f**f, Power(f, f))
+
+assert_eq(a**e, Power(3, Product(Exp(5), 5)))
+assert_eq(a**l, Power(3, Product(Log(2), 5)))
+
+assert_eq(a.numeric, 243)
+assert_eq(e**l, Exp(Product(Log(2), 5)))
+
+assert_eq(p**3, Product(27, 64, 125))
+assert_eq(s**3, Power(s, 3))
+
+#assert_eq(a*a, Power(3, 10))           # not implemented
+assert_eq(a+a, Sum(a, a))
+
+say "** Test passed!"

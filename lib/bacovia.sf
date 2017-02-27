@@ -40,13 +40,13 @@ class Bacovia {
     }
 
     method *(Object o) {
-        #Product(self, o)
-        Fraction(self, o.inv)
+        Product(self, o)
+        #Fraction(self, o.inv)
     }
 
     method /(Object o) {
-        #Product(self, o.inv)
-        Fraction(self, o)
+        Product(self, o.inv)
+        #Fraction(self, o)
     }
 
     method neg {

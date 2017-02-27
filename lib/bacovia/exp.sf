@@ -5,17 +5,8 @@ class Exp(v) {
         Exp(v + o.v)
     }
 
-    method *(Object o) {
-        Product(self, o)
-    }
-
     method /(Exp o) {
         Exp(v + o.v.neg)
-    }
-
-    method /(Object o) {
-        #o.inv * self
-        Fraction(self, o)
     }
 
     method **(Object o) {
@@ -37,16 +28,23 @@ class Exp(v) {
                         take(Power(y.v, x).alternatives...)
                     }
                 }
+                elsif (a.kind_of(Log)) {
+                    take(a.v)
+                }
             }
         }.uniq_by { .to_s }
     }
 
-    method inv {
-        Exp(v.neg)
+    method ==(Exp o) {
+        v == o.v
     }
 
-    method neg {
-        Product(-1, self)
+    method ==(_) {
+        false
+    }
+
+    method inv {
+        Exp(v.neg)
     }
 
     method numeric {

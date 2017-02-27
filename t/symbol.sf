@@ -1,0 +1,42 @@
+#!/usr/bin/ruby
+
+include('../lib/bacovia.sf')
+
+var x = Symbol('x')
+var y = Symbol('y')
+
+assert_eq(x+y, Sum(Symbol('x'), Symbol('y')))
+assert_eq(x-y, Sum(Symbol('x'), Product(-1, Symbol('y'))))
+assert_eq(x*y, Product(Symbol('x'), Symbol('y')))
+assert_eq(x/y, Product(Symbol('x'), Fraction(1, Symbol('y'))))
+
+assert_eq(x**y, Power(Symbol('x'), Symbol('y')))
+
+assert_eq(Log(x) + Log(y), Log(Product(x, y)))
+assert_eq(Exp(x) * Exp(y), Exp(Sum(x, y)))
+
+var sum = Fraction(Symbol('a'), Symbol('b'))
+
+for n in (1..3) {
+    sum += Fraction(1, n)
+}
+
+assert_eq(sum, Fraction(Sum(Product(Symbol('a'), 1, 2, 3), Product(Symbol('b'), 1, 2, 3), Product(Symbol('b'), 1, 1, 3), Product(Symbol('b'), 1, 2, 1)), Product(Symbol('b'), 1, 2, 3)))
+
+var prod = Fraction(Symbol('a'), Symbol('b'))
+
+for n in (1..3) {
+    prod *= Exp(Fraction(1, n))
+}
+
+assert_eq(prod, Product(Fraction(Symbol('a'), Symbol('b')), Exp(Fraction(1, 1)), Exp(Fraction(1, 2)), Exp(Fraction(1, 3))))
+
+var sum2 = Sum(Symbol('a'))
+
+for n in (1..3) {
+    sum2 += Fraction(1, n)
+}
+
+assert_eq(sum2, Sum(Symbol('a'), Fraction(1, 1), Fraction(1, 2), Fraction(1, 3)))
+
+say "** Test passsed!"

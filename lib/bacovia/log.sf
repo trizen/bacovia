@@ -6,24 +6,8 @@ class Log(v) {
         Log(v * o.v)
     }
 
-    method +(Object o) {
-        Sum(self, o)
-    }
-
     method -(Log o) {
         Log(v / o.v)
-    }
-
-    method -(Object o) {
-        Sum(self, o.neg)
-    }
-
-    method inv {
-        Fraction(1, self)
-    }
-
-    method neg {
-        Product(-1, self)
     }
 
     method alternatives {
@@ -36,6 +20,18 @@ class Log(v) {
                 }
             }
         }.uniq_by { .to_s }
+    }
+
+    method ==(Log o) {
+        v == o.v
+    }
+
+    method ==(_) {
+        false
+    }
+
+    method neg {
+        Log(v.inv)
     }
 
     method numeric {

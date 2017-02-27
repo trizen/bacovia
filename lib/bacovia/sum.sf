@@ -53,6 +53,14 @@ class Sum(*values) {
         }.uniq_by { .to_s }
     }
 
+    method ==(Sum o) {
+        values == o.values
+    }
+
+    method ==(_) {
+        false
+    }
+
     method inv {
         Fraction(1, self)
     }

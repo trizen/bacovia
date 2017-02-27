@@ -13,10 +13,6 @@ class Fraction(num, den) {
         )
     }
 
-    method +(Object o) {
-        Sum(self, o)
-    }
-
     method -(Number o) {
         self + o.neg
     }
@@ -55,9 +51,10 @@ class Fraction(num, den) {
         )
     }
 
-    method /(Object o) {
-        Product(self, o.inv)
-    }
+    #~ method /(Object o) {
+        #~ #self / Fraction(o, 1)
+        #~ Product(self, o.inv)
+    #~ }
 
     method **(Number o) {
         if (o < 0) {
@@ -90,8 +87,12 @@ class Fraction(num, den) {
         gather {
             for a,b in (num.alternatives ~X den.alternatives) {
                 take(a/b)
-                take(Fraction(a, b))
-                take(Product(a, Exp(Log(b).neg)).alternatives...)
+                #take(Fraction(a, b))
+                #take(Product(a, Exp(Log(b).neg)).alternatives...)
+
+                if (b == 1) {
+                    take(a)
+                }
             }
         }.uniq_by { .to_s }
     }
