@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+
+include('../lib/bacovia.sf')
+
+assert_eq(cos(Log(Symbol('x'))).simplify, Sum(Fraction(Power(Symbol('x'), -1i), 2), Fraction(Power(Symbol('x'), 1i), 2)))
+assert_eq(sin(Log(Symbol('x'))).simplify, Sum(Fraction(Power(Symbol('x'), 1i), 2i), Product(Power(Symbol('x'), -1i), -1, Fraction(1, 2i))))
+
+say "** Test passed!"

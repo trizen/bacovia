@@ -7,8 +7,8 @@ var y = Symbol('y')
 
 assert_eq(x+y, Sum(Symbol('x'), Symbol('y')))
 assert_eq(x-y, Sum(Symbol('x'), Product(-1, Symbol('y'))))
-assert_eq(x*y, Product(Symbol('x'), Symbol('y')))
-assert_eq(x/y, Product(Symbol('x'), Fraction(1, Symbol('y'))))
+assert_eq(x*y, Product(x, y))
+assert_eq(x/y, Fraction(x, y))
 
 assert_eq(x**y, Power(Symbol('x'), Symbol('y')))
 
