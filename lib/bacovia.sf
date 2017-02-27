@@ -7,14 +7,14 @@
 
 # A symbolic math library for Sidef.
 
-class Bacovia()            {}
-class Power()    < Bacovia {}
-class Fraction() < Bacovia {}
-class Sum()      < Bacovia {}
-class Product()  < Bacovia {}
-class Log()      < Bacovia {}
-class Exp()      < Bacovia {}
-class Symbol()   < Bacovia {}
+class Bacovia            {}
+class Power    < Bacovia {}
+class Fraction < Bacovia {}
+class Sum      < Bacovia {}
+class Product  < Bacovia {}
+class Log      < Bacovia {}
+class Exp      < Bacovia {}
+class Symbol   < Bacovia {}
 
 include("bacovia/*.sf")
 
