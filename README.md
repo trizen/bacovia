@@ -50,42 +50,47 @@ Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3,
 
 # DESCRIPTION
 
-As shown in the above example, it supports a variety of types, which are described bellow:
+The types support by this library are described bellow:
 
-* Symbol
-    - symbolic value: `Symbol(name)`
-* Fraction
-    - symbolic fraction: `Fraction(numerator, denominator)`
-* Power
-    - symbolic exponentiation: `Power(base, power)`
-* Log
-    - symbolic natural logarithm: `Log(x)`
-* Exp
-    - symbolic natural exponentiation: `Exp(x)`
-* Sum
-    - symbolic sum: `Sum(a, b, c)`
-* Product
-    - symbolic product: `Product(a, b, c)`
+* Symbol(name)
 
-Each type communicates with all the other types recursively.
+Represents a symbolic value.
 
-The library also has built-in support for alternative representations (provided by the method `.alternatives`),
-which uses common mathematical identities to symbolically create equivalent expressions from the self-expression.
+* Fraction(numerator, denominator)
+
+Represents a symbolic fraction.
+
+* Power(base, power)
+
+Represents symbolic exponentiation in a symbolic base.
+
+* Log(x)
+
+Represents the natural logarithm of a symbolic value.
+
+* Exp(x)
+
+Represents the natural exponentiation of a symbolic value.
+
+* Sum(a, b, c, ...)
+
+Represents a symbolic summation of an arbitrary (finite) number of values.
+
+* Product(a, b, c, ...)
+
+Represents a symbolic product of an arbitrary (finite) number of values.
 
 # SPECIAL METHODS
 
-The special methods provided by this library:
+An interesting feature is the support for alternative representations (provided by the method `.alternatives`),
+which uses common mathematical identities to symbolically create equivalent expressions from the self-expression.
+
+Bellow we describe the special methods provided by this library:
 
 * `.alternatives()`
-    - returns an array with alternative representations of the self-expression.
-* `.simplify()`
-    - returns a simplification of the self-expression.
-* `.pretty()`
-    - returns a human-readable stringification of the self-expression.
 
-
-Example for `.alternatives()`:
-
+Returns an array with alternative representations of the self-expression.
+    
 ```ruby
 Exp(Log(3) * 2).alternatives.each { .say }
 ```
@@ -97,8 +102,10 @@ Exp(Product(Log(3), 2))
 Power(3, 2)
 9
 ```
+    
+* `.simplify()`
 
-Example for `.simplify()`:
+Returns a simplification of the self-expression.
 
 ```ruby
 say Log(Log(Log(Exp(Exp(Exp(Symbol('x'))))))).simplify
@@ -110,7 +117,9 @@ Output:
 Symbol('x')
 ```
 
-Example for `.pretty()`:
+* `.pretty()`
+
+Returns a human-readable stringification of the self-expression.
 
 ```ruby
 say Power(3, Log(Fraction(1, 2))).pretty
@@ -118,7 +127,7 @@ say Power(3, Log(Fraction(1, 2))).pretty
 
 Output:
 ```ruby
-say 3^log(1/2)
+3^log(1/2)
 ```
 
 # REQUIREMENTS
