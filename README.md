@@ -50,7 +50,7 @@ Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3,
 
 # DESCRIPTION
 
-The types support by this library are described bellow:
+The types supported by this library are described bellow:
 
 #### # `Symbol(name)`
 
