@@ -62,7 +62,7 @@ Represents a symbolic fraction.
 
 #### # `Power(base, power)`
 
-Represents symbolic exponentiation in a symbolic base.
+Represents a symbolic exponentiation in a symbolic base.
 
 #### # `Log(x)`
 
