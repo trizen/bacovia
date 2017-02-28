@@ -24,7 +24,7 @@ say Exp(x)            #=> Exp(Symbol('x'))
 say Exp(x)*Exp(y)     #=> Exp(Sum(Symbol('x'), Symbol('y')))
 
 
-say "\n=> Summation fraction:"
+say "\n=> Sum:"
 var sum = Fraction(0, 1)
 
 for n in (1..10) {
@@ -34,7 +34,7 @@ say sum                     #=> Fraction(10628640, 3628800)
 say sum.numeric.as_frac     #=> 7381/2520
 
 
-say "\n=> Product fraction:"
+say "\n=> Product:"
 var prod = Fraction(1, 1)
 
 for n in (0..3) {
@@ -90,7 +90,7 @@ Bellow we describe the special methods provided by this library:
 #### # `.alternatives()`
 
 Returns an array with alternative representations of the self-expression.
-    
+
 ```ruby
 Exp(Log(3) * 2).alternatives.each { .say }
 ```
@@ -102,7 +102,7 @@ Exp(Product(Log(3), 2))
 Power(3, 2)
 9
 ```
-    
+
 #### # `.simplify()`
 
 Returns a simplification of the self-expression.

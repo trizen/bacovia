@@ -26,7 +26,7 @@ say Exp(x)            #=> Exp(Symbol('x'))
 say Exp(x)*Exp(y)     #=> Exp(Sum(Symbol('x'), Symbol('y')))
 
 
-say "\n=> Summation fraction:"
+say "\n=> Sum:"
 var sum = Fraction(0, 1)
 
 for n in (1..10) {
@@ -36,7 +36,7 @@ say sum                     #=> Fraction(10628640, 3628800)
 say sum.numeric.as_frac     #=> 7381/2520
 
 
-say "\n=> Product fraction:"
+say "\n=> Product:"
 var prod = Fraction(1, 1)
 
 for n in (0..3) {
@@ -44,6 +44,7 @@ for n in (0..3) {
 }
 say prod                    #=> Product(Fraction(1, 1), Exp(Fraction(1, 1)), Exp(Fraction(1, 1)), Exp(Fraction(1, 2)), Exp(Fraction(1, 6)))
 say prod.numeric            #=> 14.39191609514989
+
 
 say "\n=> Alternative representations:"
 Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3, 5), 243]
