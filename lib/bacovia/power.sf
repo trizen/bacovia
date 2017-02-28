@@ -53,7 +53,7 @@ class Power(v, n) {
 
                 # Identity: log(x)^log(y) = y^(log(log(x)))
                 if (a.kind_of(Log) && b.kind_of(Log)) {
-                    take(Power(b.v, Log(b)))
+                    take(Power(b.v, Log(a)))
                 }
             }
         }.uniq_by { .to_s }
@@ -64,7 +64,20 @@ class Power(v, n) {
     }
 
     method pretty {
-        n.kind_of(Fraction) ?  "#{v.pretty}^(#{n.pretty})" : "#{v.pretty}^#{n.pretty}"
+        if (v.kind_of(Fraction)) {
+            if (n.kind_of(Fraction)) {
+                 "(#{v.pretty})^(#{n.pretty})"
+            }
+            else {
+                 "(#{v.pretty})^#{n.pretty}"
+            }
+        }
+        elsif (n.kind_of(Fraction)) {
+             "#{v.pretty}^(#{n.pretty})"
+        }
+        else {
+             "#{v.pretty}^#{n.pretty}"
+        }
     }
 
     method to_s {
