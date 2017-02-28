@@ -161,6 +161,6 @@ class Number {
     }
 
     method pretty {
-        ["#{self}", self.as_rat].min_by { .len }
+        ["#{self}", self.is_int ? () : "(#{self.as_rat})"].min_by { .len }
     }
 }
