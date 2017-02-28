@@ -97,20 +97,7 @@ class Fraction(num, den) {
     }
 
     method pretty {
-        if (num.kind_of(Fraction)) {
-            if (den.kind_of(Fraction)) {
-                "(#{num.num.pretty} * #{den.den.pretty})/(#{num.den.pretty} * #{den.num.pretty})"
-            }
-            else {
-                "#{num.num.pretty}/(#{num.den.pretty} * #{den.pretty})"
-            }
-        }
-        elsif (den.kind_of(Fraction)) {
-            "(#{num.pretty} * #{den.den.pretty})/#{den.num.pretty}"
-        }
-        else {
-            "#{num.pretty}/#{den.pretty}"
-        }
+        "(#{num.pretty} / #{den.pretty})"
     }
 
     method to_s {

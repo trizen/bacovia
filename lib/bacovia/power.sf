@@ -64,20 +64,7 @@ class Power(v, n) {
     }
 
     method pretty {
-        if (v.kind_of(Fraction)) {
-            if (n.kind_of(Fraction)) {
-                 "(#{v.pretty})^(#{n.pretty})"
-            }
-            else {
-                 "(#{v.pretty})^#{n.pretty}"
-            }
-        }
-        elsif (n.kind_of(Fraction)) {
-             "#{v.pretty}^(#{n.pretty})"
-        }
-        else {
-             "#{v.pretty}^#{n.pretty}"
-        }
+        "#{v.pretty}^#{n.pretty}"
     }
 
     method to_s {
