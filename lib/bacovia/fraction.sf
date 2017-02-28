@@ -51,11 +51,6 @@ class Fraction(num, den) {
         )
     }
 
-    #~ method /(Object o) {
-        #~ #self / Fraction(o, 1)
-        #~ Product(self, o.inv)
-    #~ }
-
     method **(Number o) {
         if (o < 0) {
             var a = o.abs
@@ -88,7 +83,7 @@ class Fraction(num, den) {
             for a,b in (num.alternatives ~X den.alternatives) {
                 take(a/b)
                 take(Fraction(a, b))
-                #take(Product(a, Exp(Log(b).neg)).alternatives...)
+                #take(Product(a, Exp(Log(b).neg)))
 
                 if (b == 1) {
                     take(a)
