@@ -139,8 +139,8 @@ var x = Symbol('x')
 var expr = (x**2 - x + 41)
 
 for n in (1..3) {
-    x.value = n              # sets the value of `x` to `n`
-    say expr.numeric
+    x.value = n              # sets `n` as the value of `x`
+    say expr.numeric         # evaluates the expression numerically
 }
 ```
 
