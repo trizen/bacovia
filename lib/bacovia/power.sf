@@ -51,6 +51,16 @@ class Power(v, n) {
                     take(1)
                 }
 
+                # Identity: x^1 = x
+                if (b == 1) {
+                    take(a)
+                }
+
+                # Identity: x^2 = x*x
+                #~ if (b == 2) {
+                    #~ take(a * a)
+                #~ }
+
                 # Identity: log(x)^log(y) = y^(log(log(x)))
                 if (a.kind_of(Log) && b.kind_of(Log)) {
                     take(Power(b.v, Log(a)))

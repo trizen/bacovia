@@ -83,13 +83,13 @@ Represents a product of an arbitrary (finite) number of symbolic values.
 # SPECIAL METHODS
 
 An interesting feature is the support for alternative representations (provided by the method `.alternatives`),
-which uses common mathematical identities to symbolically create equivalent expressions from the self-expression.
+which uses common mathematical identities to create symbolically equivalent expressions from the self-expression.
 
 Bellow we describe the special methods provided by this library:
 
 #### # `.alternatives()`
 
-Returns an array with alternative representations of the self-expression.
+Returns an array with alternative representations from the self-expression.
 
 ```ruby
 Exp(Log(3) * 2).alternatives.each { .say }
