@@ -9,24 +9,32 @@ class Product(*values) {
         Product(values..., o.values.map{.inv}...)
     }
 
-    method /(Object o) {
-        var copy = [values...]
+    #~ method /(Object o) {
+        #~ var copy = [values...]
         #~ if (copy.remove_first(o)) {
             #~ Product(copy...)
         #~ }
         #~ else {
-            Product(copy..., o.inv)
+            #~ Product(copy..., o.inv)
         #~ }
+    #~ }
+
+    method /(Object o) {
+        Product(values..., o.inv)
     }
 
-    method *(Object o) {
-        var copy = [values...]
+    #~ method *(Object o) {
+        #~ var copy = [values...]
         #~ if (copy.remove_first(o.inv)) {
             #~ Product(copy...)
         #~ }
         #~ else {
-            Product(copy..., o)
+            #~ Product(copy..., o)
         #~ }
+    #~ }
+
+    method *(Object o) {
+        Product(values..., o)
     }
 
     method **(Object o) {
@@ -50,7 +58,7 @@ class Product(*values) {
         }
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|
                 take(v.reduce('*'))
@@ -74,7 +82,7 @@ class Product(*values) {
         values.map { .numeric }.prod
     }
 
-    method pretty {
+    method pretty() is cached {
         '(' + values.map{.pretty}.join(' * ') + ')'
     }
 

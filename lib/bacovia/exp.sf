@@ -13,7 +13,7 @@ class Exp(v) {
         Exp(v * o)
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             for a in (v.alternatives) {
                 take(Exp(a))
@@ -51,7 +51,7 @@ class Exp(v) {
         v.numeric.exp
     }
 
-    method pretty {
+    method pretty() is cached {
         "exp(#{v.pretty})"
     }
 

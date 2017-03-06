@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-class Symbol(name) {
+class Symbol(name, value=nil) {
 
     method ==(Symbol o) {
         name == o.name
@@ -8,6 +8,10 @@ class Symbol(name) {
 
     method ==(_) {
         false
+    }
+
+    method numeric {
+        value
     }
 
     method pretty {

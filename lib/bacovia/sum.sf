@@ -45,7 +45,7 @@ class Sum(*values) {
         Sum(values.map { _ / o }...)
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|
                 take(v.reduce('+'))
@@ -69,7 +69,7 @@ class Sum(*values) {
         values.map { .numeric }.sum
     }
 
-    method pretty {
+    method pretty() is cached {
         '(' + values.map{.pretty}.join(' + ') + ')'
     }
 

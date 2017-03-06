@@ -10,7 +10,7 @@ class Log(v) {
         Log(v / o.v)
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             for a in (v.alternatives) {
                 take(Log(a))
@@ -38,7 +38,7 @@ class Log(v) {
         v.numeric.log
     }
 
-    method pretty {
+    method pretty() is cached {
         "log(#{v.pretty})"
     }
 

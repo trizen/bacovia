@@ -78,7 +78,7 @@ class Fraction(num, den) {
         Fraction(num.neg, den)
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             for a,b in (num.alternatives ~X den.alternatives) {
                 take(a/b)
@@ -96,7 +96,7 @@ class Fraction(num, den) {
         num.numeric / den.numeric
     }
 
-    method pretty {
+    method pretty() is cached {
         "(#{num.pretty} / #{den.pretty})"
     }
 

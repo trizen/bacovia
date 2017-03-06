@@ -52,9 +52,9 @@ Power(3, 5).alternatives.each { .say }    #=> [Exp(Product(Log(3), 5)), Power(3,
 
 The types supported by this library are described bellow:
 
-#### # `Symbol(name)`
+#### # `Symbol(name, value=nil)`
 
-Represents a symbolic value.
+Represents a symbolic value. Optionally, it can have a numeric value.
 
 #### # `Fraction(numerator, denominator)`
 
@@ -128,6 +128,27 @@ say Power(3, Log(Fraction(1, 2))).pretty
 Output:
 ```ruby
 3^log(1/2)
+```
+
+#### # `.numeric()`
+
+Evaluates the self-expression numerically and returns the result as a Number or a Complex object.
+
+```ruby
+var x = Symbol('x')
+var expr = (x**2 - x + 41)
+
+for n in (1..3) {
+    x.value = n              # sets the value of `x` to `n`
+    say expr.numeric
+}
+```
+
+Output:
+```ruby
+41
+43
+47
 ```
 
 # REQUIREMENTS

@@ -39,7 +39,7 @@ class Power(v, n) {
         Power(v, n.neg)
     }
 
-    method alternatives {
+    method alternatives() is cached {
         gather {
             for a,b in (v.alternatives ~X n.alternatives) {
                 take(Exp(Log(a) * b))
@@ -73,8 +73,16 @@ class Power(v, n) {
         v.numeric ** n.numeric
     }
 
-    method pretty {
-        "#{v.pretty}^#{n.pretty}"
+    method pretty() is cached {
+        var base = v.pretty
+        var pow = n.pretty
+
+        if (base.begins_with('-')) {
+            "(#{base})^#{pow}"
+        }
+        else {
+            "#{base}^#{pow}"
+        }
     }
 
     method to_s {
