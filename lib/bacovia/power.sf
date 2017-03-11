@@ -65,6 +65,12 @@ class Power(v, n) {
                 if (a.kind_of(Log) && b.kind_of(Log)) {
                     take(Power(b.v, Log(a)))
                 }
+
+                # Identity: x^log(y) = y^log(x)
+                if (b.kind_of(Log)) {
+                    take(Power(b.v, Log(a)))
+                }
+
             }
         }.uniq_by { .to_s }
     }
