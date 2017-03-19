@@ -9,33 +9,33 @@ class Product(*values) {
         Product(values..., o.values.map{.inv}...)
     }
 
-    #~ method /(Object o) {
-        #~ var copy = [values...]
-        #~ if (copy.remove_first(o)) {
-            #~ Product(copy...)
-        #~ }
-        #~ else {
-            #~ Product(copy..., o.inv)
-        #~ }
-    #~ }
-
     method /(Object o) {
-        Product(values..., o.inv)
+        var copy = [values...]
+        if (copy.remove_first(o)) {
+            Product(copy...)
+        }
+        else {
+            Product(copy..., o.inv)
+        }
     }
 
-    #~ method *(Object o) {
-        #~ var copy = [values...]
-        #~ if (copy.remove_first(o.inv)) {
-            #~ Product(copy...)
-        #~ }
-        #~ else {
-            #~ Product(copy..., o)
-        #~ }
+    #~ method /(Object o) {
+        #~ Product(values..., o.inv)
     #~ }
 
     method *(Object o) {
-        Product(values..., o)
+        var copy = [values...]
+        if (copy.remove_first(o.inv)) {
+            Product(copy...)
+        }
+        else {
+            Product(copy..., o)
+        }
     }
+
+    #~ method *(Object o) {
+        #~ Product(values..., o)
+    #~ }
 
     method **(Object o) {
         Product(values.map{ _ ** o }...)
@@ -58,6 +58,7 @@ class Product(*values) {
         }
     }
 
+    # TODO: remove pairs of (x, 1/x)
     method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|

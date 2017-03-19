@@ -45,6 +45,7 @@ class Sum(*values) {
         Sum(values.map { _ / o }...)
     }
 
+    # TODO: remove pairs of (x, -x)
     method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|

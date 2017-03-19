@@ -71,7 +71,12 @@ class Fraction(num, den) {
     }
 
     method inv {
-        Fraction(den, num)
+        if (num == 1) {
+            den
+        }
+        else {
+            Fraction(den, num)
+        }
     }
 
     method neg {

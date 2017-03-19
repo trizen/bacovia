@@ -21,7 +21,8 @@ include("bacovia/*.sf")
 class Bacovia {
 
     #const I = Exp(Fraction(1, 2) * Log(-1))
-    const I = Power(-1, Fraction(1, 2))
+    #const I = Power(-1, Fraction(1, 2))
+    const I = Complex.i
 
     # sin(x) = (exp(i * x) - exp(-i * x)) / (2i)
     method sin {
@@ -35,12 +36,47 @@ class Bacovia {
 
     # asin(x) = -i log(i x + sqrt(1 - x^2))
     method asin {
-        -I * Log(I*self + Power(1 - Power(self, 2), Fraction(1, 2)))
+        -I * Log(I*self + Power(1 - Power(self, 2), 1/2))
     }
 
     # acos(x) = -2 i log(i sqrt((1 - x)/2) + sqrt((1 + x)/2))
     method acos {
-        -2*I * Log(I*Power(Fraction(1 - self, 2), Fraction(1, 2)) + Power(Fraction(1 + self, 2), Fraction(1, 2)))
+        -2*I * Log(I*Power(Fraction(1 - self, 2), 1/2) + Power(Fraction(1 + self, 2), 1/2))
+    }
+
+    # cosh(x) = (exp(2x) + 1) / (2*exp(x))
+    method cosh {
+        Fraction((Exp(2*self) + 1), (2*Exp(self)))
+    }
+
+    # sinh(x) = (exp(2x) - 1) / (2*exp(x))
+    method sinh {
+        Fraction((Exp(2*self) - 1), (2*Exp(self)))
+    }
+
+    # tanh(x) = (exp(2x) - 1) / (exp(2x) + 1)
+    method tanh {
+        Fraction((Exp(2*self) - 1), (Exp(2*self) + 1))
+    }
+
+    # coth(x) = (exp(2x) + 1) / (exp(2x) - 1)
+    method coth {
+        Fraction((Exp(2*self) + 1), (Exp(2*self) - 1))
+    }
+
+    # sech(x) = (2*exp(x)) / (exp(2x) + 1)
+    method sech {
+        Fraction((2*Exp(self)), (Exp(2*self) + 1))
+    }
+
+    # csch(x) = (2*exp(x)) / (exp(2x) - 1)
+    method csch {
+        Fraction((2*Exp(self)), (Exp(2*self) - 1))
+    }
+
+    # sqrt(x) = x^(1/2)
+    method sqrt {
+        self**(1/2)
     }
 
     method +(Object o) {
