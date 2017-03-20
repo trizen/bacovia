@@ -1,0 +1,71 @@
+#!/usr/bin/ruby
+
+include('../lib/bacovia.sf')
+
+var x = Symbol('x', +43)
+var y = Symbol('y', -43)
+var z = Symbol('z', 1.5)
+var k = Symbol('k', -0.5)
+
+assert_eq(asin(sin(+z)) -> numeric.real.round(-20), +1.5)
+assert_eq(asin(sin(-z)) -> numeric.real.round(-20), -1.5)
+
+assert_eq(acos(cos(+z)) -> numeric.real.round(-20), +1.5)
+assert_eq(acos(cos(-z)) -> numeric.real.round(-20), +1.5)
+
+assert_eq(atanh(tanh(+x)) -> numeric, +43)
+assert_eq(atanh(tanh(-x)) -> numeric, -43)
+assert_eq(atanh(tanh(+y)) -> numeric, -43)
+
+assert_eq(acosh(cosh(+x)) -> numeric, +43)
+assert_eq(acosh(cosh(-x)) -> numeric, +43)
+assert_eq(acosh(cosh(+y)) -> numeric, +43)
+
+assert_eq(asinh(sinh(+x)) -> numeric, +43)
+assert_eq(asinh(sinh(-x)) -> numeric.round(-20), -43)
+assert_eq(asinh(sinh(+y)) -> numeric.round(-20), -43)
+
+assert_eq(asinh(sinh(k)) -> numeric, -0.5)
+assert_eq(atanh(tanh(k)) -> numeric, -0.5)
+assert_eq(acsch(csch(k)) -> numeric, -0.5)
+assert_eq(acoth(coth(k)) -> numeric, -0.5)
+assert_eq(acosh(cosh(k)) -> numeric.round(-20), 0.5)
+assert_eq(asech(sech(k)) -> numeric.round(-20), 0.5)
+
+
+
+#
+## asinh(x)
+#
+do {
+    var z = (x**2 - 1)/(2*x)
+    assert_eq(Exp(asinh(z)) -> numeric.round(-50), +43)
+}
+
+#
+## acosh(x)
+#
+do {
+    var z = (x**2 + 1)/(2*x)
+    assert_eq(Exp(acosh(z)) -> numeric.round(-50), +43)
+}
+
+do {
+    var z = (y**2 + 1)/(2*y)
+    assert_eq(Exp(acosh(z)) -> numeric, exp(acosh(((-43)**2 + 1)/(2*-43))))
+}
+
+#
+## atanh(x)
+#
+do {
+    var z = (x**2 - 1)/(x**2 + 1)
+    assert_eq(Exp(atanh(z)) -> numeric.round(-50), +43)
+}
+
+do {
+    var z = (y**2 - 1)/(y**2 + 1)
+    assert_eq(Exp(atanh(z)) -> numeric.round(-50), 43)
+}
+
+say "** Test passed!"

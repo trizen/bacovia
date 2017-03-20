@@ -24,29 +24,15 @@ class Bacovia {
     #const I = Power(-1, Fraction(1, 2))
     const I = Complex.i
 
-    # sin(x) = (exp(i * x) - exp(-i * x)) / (2i)
+
+    # sin(x) = (exp(i*x) - exp(-i*x)) / (2i)
     method sin {
         Fraction(Exp(I * self) - Exp(-I * self), (2*I))
     }
 
-    # cos(x) = (exp(-i * x) + exp(i * x)) / 2
-    method cos {
-        Fraction(Exp(-I * self) + Exp(I * self), 2)
-    }
-
     # asin(x) = -i log(i x + sqrt(1 - x^2))
     method asin {
-        -I * Log(I*self + Power(1 - Power(self, 2), 1/2))
-    }
-
-    # acos(x) = -2 i log(i sqrt((1 - x)/2) + sqrt((1 + x)/2))
-    method acos {
-        -2*I * Log(I*Power(Fraction(1 - self, 2), 1/2) + Power(Fraction(1 + self, 2), 1/2))
-    }
-
-    # cosh(x) = (exp(2x) + 1) / (2*exp(x))
-    method cosh {
-        Fraction((Exp(2*self) + 1), (2*Exp(self)))
+        -I * Log(I*self + sqrt(1 - self**2))
     }
 
     # sinh(x) = (exp(2x) - 1) / (2*exp(x))
@@ -54,9 +40,62 @@ class Bacovia {
         Fraction((Exp(2*self) - 1), (2*Exp(self)))
     }
 
+    # asinh(x) = log(sqrt(x^2 + 1) + x)
+    method asinh {
+       Log(sqrt(self**2 + 1) + self)
+    }
+
+
+    # cos(x) = (exp(-i*x) + exp(i*x)) / 2
+    method cos {
+        Fraction(Exp(-I * self) + Exp(I * self), 2)
+    }
+
+    # acos(x) = π/2 + i log(i x + sqrt(1 - x^2))
+    method acos {
+        Log(I)*-I + I*Log(I*self + sqrt(1 - self**2))
+    }
+
+    # cosh(x) = (exp(2x) + 1) / (2*exp(x))
+    method cosh {
+        Fraction((Exp(2*self) + 1), (2*Exp(self)))
+    }
+
+    # acosh(x) = log(sqrt(x^2 - 1) + x)
+    method acosh {
+         Log(self + sqrt(self-1)*sqrt(self+1))
+    }
+
+
+    # tan(x) = -i + (2*i)/(1 + exp(2*i*x))
+    method tan {
+        -I + Fraction(2*I, 1 + Exp(2*I*self))
+    }
+
+    # atan(x) = -i log((1 + i x)/sqrt(1 + x^2))
+    method atan {
+        -I * Log(Fraction(1 + I*self, sqrt(1 + self**2)))
+    }
+
     # tanh(x) = (exp(2x) - 1) / (exp(2x) + 1)
     method tanh {
         Fraction((Exp(2*self) - 1), (Exp(2*self) + 1))
+    }
+
+    # atanh(x) = log(sqrt(1 + x)/sqrt(1 - x))
+    method atanh {
+        Log(sqrt(1 + self)/sqrt(1 - self))
+    }
+
+
+    # cot(x) = i + (2*i)/(-1 + exp(2*i*x))
+    method cot {
+        I + Fraction(2*I, -1 + Exp(2*I*self))
+    }
+
+    # acot(x) = i*(log((-i + x)/x) - log((i + x)/x))/2
+    method acot {
+        Fraction(I*(Log(Fraction(-I + self, self)) - Log(Fraction(I + self, self))), 2)
     }
 
     # coth(x) = (exp(2x) + 1) / (exp(2x) - 1)
@@ -64,15 +103,54 @@ class Bacovia {
         Fraction((Exp(2*self) + 1), (Exp(2*self) - 1))
     }
 
+    # acoth(x) = (-log((-1 + x)/x) + log((1 + x)/x))/2
+    method acoth {
+        Fraction(Log(Fraction(self + 1, self) / Fraction(self - 1, self)), 2)
+        #Log(sqrt(Fraction(self + 1, self - 1)))
+    }
+
+
+    # sec(x) = 2/(exp(-i*x) + exp(i*x))
+    method sec {
+        Fraction(2, Exp(-I * self) + Exp(I * self))
+    }
+
+    # asec(x) = π/2 + i log(i/x + sqrt(1 - 1/x^2))
+    method asec {
+        Log(I)*-I + I*Log(I*self.inv + sqrt(1 - self.inv**2))
+    }
+
     # sech(x) = (2*exp(x)) / (exp(2x) + 1)
     method sech {
         Fraction((2*Exp(self)), (Exp(2*self) + 1))
+    }
+
+    # asech(x) = log(1/x + sqrt(-1 + 1/x) sqrt(1 + 1/x))
+    method asech {
+        Log(self.inv + sqrt(self.inv - 1)*sqrt(self.inv + 1))
+    }
+
+
+    # csc(x) = -(2*i)/(exp(-i*x) - exp(i*x))
+    method csc {
+        Fraction(-2*I, Exp(-I * self) - Exp(I * self))
+    }
+
+    # acsc(x) = -i log(i/x + sqrt(1 - 1/x^2))
+    method acsc {
+        -I * Log(Fraction(I, self) + sqrt(1 - (self**2 -> inv)))
     }
 
     # csch(x) = (2*exp(x)) / (exp(2x) - 1)
     method csch {
         Fraction((2*Exp(self)), (Exp(2*self) - 1))
     }
+
+    # acsch(x) = log(1/x + sqrt(1 + 1/x^2))
+    method acsch {
+        Log(self.inv + sqrt(1 + (self**2 -> inv)))
+    }
+
 
     # sqrt(x) = x^(1/2)
     method sqrt {
