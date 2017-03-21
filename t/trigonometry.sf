@@ -7,11 +7,11 @@ var y = Symbol('y', -43)
 var z = Symbol('z', 1.5)
 var k = Symbol('k', -0.5)
 
-assert_eq(asin(sin(+z)) -> numeric.real.round(-20), +1.5)
-assert_eq(asin(sin(-z)) -> numeric.real.round(-20), -1.5)
+assert_eq(asin(sin(+z)) -> numeric.round(-20), +1.5)
+assert_eq(asin(sin(-z)) -> numeric.round(-20), -1.5)
 
-assert_eq(acos(cos(+z)) -> numeric.real.round(-20), +1.5)
-assert_eq(acos(cos(-z)) -> numeric.real.round(-20), +1.5)
+assert_eq(acos(cos(+z)) -> numeric.round(-20), +1.5)
+assert_eq(acos(cos(-z)) -> numeric.round(-20), +1.5)
 
 assert_eq(atanh(tanh(+x)) -> numeric, +43)
 assert_eq(atanh(tanh(-x)) -> numeric, -43)
