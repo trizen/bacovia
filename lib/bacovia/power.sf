@@ -86,6 +86,9 @@ class Power(v, n) {
         if (base.begins_with('-')) {
             "(#{base})^#{pow}"
         }
+        elsif (v.kind_of(Power)) {
+            "(#{base})^#{pow}"
+        }
         else {
             "#{base}^#{pow}"
         }
