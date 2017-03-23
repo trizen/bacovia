@@ -9,7 +9,7 @@ assert_eq(a, Fraction(Sum(Power(Symbol('x'), -1i), Power(Symbol('x'), 1i)), 2))
 assert_eq(b, Fraction(Sum(Power(Symbol('x'), 1i), Product(Power(Symbol('x'), -1i), -1)), 2i))
 
 assert_eq(a.pretty, '((x^-i + x^i) / 2)')
-assert_eq(b.pretty, '((x^i + (x^-i * -1)) / 2i)')
+assert_eq(b.pretty, '((x^i + (x^-i * -1)) / (2i))')
 
 var c = simplify(Exp(Log(Symbol('x')) * Exp(Symbol('y'))))
 assert_eq(c, Power(Symbol('x'), Exp(Symbol('y'))))
