@@ -157,7 +157,8 @@ class Complex {
     }
 
     method pretty {
-        "#{self}"
+        var r = "#{self}"
+        r.contains(/\S[-+]/) ? "(#{r})" : r
     }
 
     method numeric {
