@@ -92,7 +92,7 @@ Bellow we describe the special methods provided by this library:
 Returns an array with alternative representations from the self-expression.
 
 ```ruby
-Exp(Log(3) * 2).alternatives.each { .say }
+Exp(Log(3) * 2) -> alternatives.each { .say }
 ```
 
 Output:
