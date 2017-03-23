@@ -61,14 +61,19 @@ class Power(v, n) {
                     #~ take(a * a)
                 #~ }
 
-                # Identity: log(x)^log(y) = y^(log(log(x)))
-                if (a.kind_of(Log) && b.kind_of(Log)) {
-                    take(Power(b.v, Log(a)))
-                }
-
                 # Identity: x^log(y) = y^log(x)
                 if (b.kind_of(Log)) {
-                    take(Power(b.v, Log(a)))
+                    take(b.v**Log(a))
+                }
+
+                # Identity: exp(x)^log(y) = y^x
+                if (a.kind_of(Exp) && b.kind_of(Log)) {
+                    take(b.v**a.v)
+                }
+
+                # Identity: exp(x)^y = exp(y*x)
+                if (a.kind_of(Exp)) {
+                    take(Exp(a.v * b))
                 }
 
             }

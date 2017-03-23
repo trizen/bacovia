@@ -108,7 +108,7 @@ Power(3, 2)
 Returns a simplification of the self-expression.
 
 ```ruby
-say Log(Log(Log(Exp(Exp(Exp(Symbol('x'))))))).simplify
+Exp(Log(Log(Exp(Exp(Log(Symbol('x'))))))) -> simplify.say
 ```
 
 Output:
@@ -122,7 +122,7 @@ Symbol('x')
 Returns a human-readable stringification of the self-expression.
 
 ```ruby
-say Power(3, Log(Fraction(1, 2))).pretty
+Power(3, Log(Fraction(1, 2))) -> pretty.say
 ```
 
 Output:
