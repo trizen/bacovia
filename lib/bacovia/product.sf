@@ -41,14 +41,6 @@ class Product(*values) {
         Product(values.map{ _ ** o }...)
     }
 
-    method +(Object o) {
-        Sum(self, o)
-    }
-
-    method -(Object o) {
-        Sum(self, o.neg)
-    }
-
     method neg {
         if (values) {
             Product(values[0].neg, values.ft(1)...)
