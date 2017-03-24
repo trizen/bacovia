@@ -54,7 +54,7 @@ class Sum(*values) {
                         .class
                     }.values.map {
                         .reduce('+')
-                    }.sort_by{.class}.reduce('+')
+                    }.sort_by { .class }.reduce('+')
                 )
             }
         }.uniq_by { .to_s }
@@ -69,7 +69,7 @@ class Sum(*values) {
     }
 
     method neg {
-        Sum(values.map{.neg}...)
+        Sum(values.map{ .neg }...)
     }
 
     method numeric {
@@ -77,6 +77,7 @@ class Sum(*values) {
     }
 
     method pretty() is cached {
+        values || return '0'
         '(' + values.map{.pretty}.join(' + ') + ')'
     }
 

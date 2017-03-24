@@ -59,7 +59,7 @@ class Product(*values) {
                         .class
                     }.values.map {
                         .reduce('*')
-                    }.sort_by{.class}.reduce('*')
+                    }.sort_by { .class }.reduce('*')
                 )
             }
         }.uniq_by { .to_s }
@@ -82,6 +82,7 @@ class Product(*values) {
     }
 
     method pretty() is cached {
+        values || return '1'
         '(' + values.map{.pretty}.join(' * ') + ')'
     }
 
