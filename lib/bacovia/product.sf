@@ -54,7 +54,13 @@ class Product(*values) {
     method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|
-                take(v.reduce('*'))
+                take (
+                    v.group_by {
+                        .class
+                    }.values.map {
+                        .reduce('*')
+                    }.sort_by{.class}.reduce('*')
+                )
             }
         }.uniq_by { .to_s }
     }
