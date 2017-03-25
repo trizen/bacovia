@@ -42,12 +42,7 @@ class Product(*values) {
     }
 
     method neg {
-        if (values) {
-            Product(values[0].neg, values.ft(1)...)
-        }
-        else {
-            Product(-1)
-        }
+        Product(-1, values...)
     }
 
     # TODO: remove pairs of (x, 1/x)
