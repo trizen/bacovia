@@ -22,8 +22,7 @@ class Bacovia {
 
     #const I = Exp(Fraction(1, 2) * Log(-1))
     #const I = Power(-1, Fraction(1, 2))
-    const I = Complex.i
-
+    const I = 1i
 
     # sin(x) = (exp(i*x) - exp(-i*x)) / (2i)
     method sin {

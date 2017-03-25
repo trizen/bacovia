@@ -19,6 +19,6 @@ class Symbol(name, value=nil) {
     }
 
     method to_s {
-        "Symbol('#{name}')"
+        defined(value) ? "Symbol('#{name}', #{value})" : "Symbol('#{name}')"
     }
 }
