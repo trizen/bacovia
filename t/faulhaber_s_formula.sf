@@ -1,0 +1,26 @@
+#!/usr/bin/ruby
+
+#
+## http://rosettacode.org/wiki/Faulhaber%27s_formula
+#
+
+include('../lib/bacovia.sf')
+
+var n = Symbol('n')
+
+func faulhaber_s_formula(p) {
+
+    var sum = Sum()
+    for j in (0..p) {
+        sum += (binomial(p+1, j) * bernoulli(j) * n**(p + 1 - j))
+    }
+
+    1/(p+1) * sum
+}
+
+for p in (0..5) {
+    var f = faulhaber_s_formula(p).simplify
+    n.value = 7
+    assert_eq(f.numeric, sum_by(1..7, { _**p }))
+    printf("F(%d) = %s\n", p, f.pretty)
+}
