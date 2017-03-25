@@ -6,11 +6,9 @@
 
 include('../lib/bacovia.sf')
 
-var n = Symbol('n')
-
-func faulhaber_s_formula(p) {
-
+func faulhaber_s_formula(n, p) {
     var sum = Sum()
+
     for j in (0..p) {
         sum += (binomial(p+1, j) * bernoulli(j) * n**(p + 1 - j))
     }
@@ -19,8 +17,8 @@ func faulhaber_s_formula(p) {
 }
 
 for p in (0..5) {
-    var f = faulhaber_s_formula(p).simplify
-    n.value = 7
+    var n = Symbol('n', 7)
+    var f = faulhaber_s_formula(n, p).simplify
     assert_eq(f.numeric, sum_by(1..7, { _**p }))
     printf("F(%d) = %s\n", p, f.pretty)
 }
