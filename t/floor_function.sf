@@ -2,7 +2,7 @@
 
 include('../lib/bacovia.sf')
 
-var pi = (Log(-1) * -1i)
+const pi = (Log(-1) * -1i)
 
 func my_floor(x) {
     x - 1/2 + ((1i * (Log(1 - Exp(2i*pi*x)) - Log(Exp(-2i*pi*x) * (Exp(2i*pi*x) - 1))))/(2*pi))
