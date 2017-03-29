@@ -18,7 +18,9 @@ var expressions = [
 
 assert_eq(gather {
     for n in (1..5) {
-        take(zeta_2n(n).simple.pretty)
+        var z = zeta_2n(n).simple.pretty
+        say "zeta(#{2*n}) = #{z}"
+        take(z)
     }
 }, expressions)
 

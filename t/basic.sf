@@ -12,6 +12,9 @@ assert_eq(a-b, Fraction(-2, 24))
 
 assert_eq(a**b, Power(a, b))
 
+#assert_eq(a * Log(b), Fraction(Product(Log(Fraction(5, 6)), 3), 4))
+#assert_eq(a * Exp(b), Fraction(Product(Exp(Fraction(5, 6)), 3), 4))
+
 assert_eq(a * Log(b), Product(Fraction(3, 4), Log(Fraction(5, 6))))
 assert_eq(a * Exp(b), Product(Fraction(3, 4), Exp(Fraction(5, 6))))
 

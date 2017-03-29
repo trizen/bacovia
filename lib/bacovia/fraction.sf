@@ -13,6 +13,10 @@ class Fraction(num, den) {
         )
     }
 
+    #~ method +(Object o) {
+        #~ self + Fraction(o, 1)
+    #~ }
+
     method -(Number o) {
         self + o.neg
     }
@@ -21,9 +25,9 @@ class Fraction(num, den) {
         self + o.neg
     }
 
-    method -(Object o) {
-        Sum(self, o.neg)
-    }
+    #~ method -(Object o) {
+        #~ self - Fraction(o, 1)
+    #~ }
 
     method *(Number o) {
         Fraction(num*o, den)
@@ -33,9 +37,9 @@ class Fraction(num, den) {
         Fraction(num*o.num, den*o.den)
     }
 
-    method *(Object o) {
-        Product(self, o)
-    }
+    #~ method *(Object o) {
+        #~ self * Fraction(o, 1)
+    #~ }
 
     method /(Number o) {
         Fraction(
