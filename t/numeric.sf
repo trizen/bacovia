@@ -4,14 +4,14 @@ include('../lib/bacovia.sf')
 
 assert_eq(Power(2, Fraction(1, 2)).numeric.round(-10), 2.sqrt.round(-10))
 
-assert_eq(Exp(Log(3)).simplify, 3)
-assert_eq(Log(Exp(5)).simplify, 5)
+assert_eq(Exp(Log(3)).simple, 3)
+assert_eq(Log(Exp(5)).simple, 5)
 
-assert_eq(Power(5,3).simplify, 125)
-assert_eq(Fraction(42, 66).simplify, 7/11)
+assert_eq(Power(5,3).simple, 125)
+assert_eq(Fraction(42, 66).simple, 7/11)
 
-assert_eq(Fraction(Exp(Log(3)), Log(Exp(5))).simplify, 3/5)
-assert_eq(Product(Exp(Log(9)), Log(Exp(5))).simplify, 45)
-assert_eq(Sum(Exp(Log(7)), Log(Exp(3)), Log(Log(Exp(Exp(9))))).simplify, 19)
+assert_eq(Fraction(Exp(Log(3)), Log(Exp(5))).simple, 3/5)
+assert_eq(Product(Exp(Log(9)), Log(Exp(5))).simple, 45)
+assert_eq(Sum(Exp(Log(7)), Log(Exp(3)), Log(Log(Exp(Exp(9))))).simple, 19)
 
 say "** Test passed!"

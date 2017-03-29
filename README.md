@@ -103,12 +103,12 @@ Power(3, 2)
 9
 ```
 
-#### # `.simplify()`
+#### # `.simple()`
 
 Returns a simplification of the self-expression.
 
 ```ruby
-Exp(Log(Log(Exp(Exp(Log(Symbol('x'))))))) -> simplify.say
+Exp(Log(Log(Exp(Exp(Log(Symbol('x'))))))) -> simple.say
 ```
 
 Output:

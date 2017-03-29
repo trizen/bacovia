@@ -18,7 +18,7 @@ func faulhaber_s_formula(n, p) {
 
 for p in (0..5) {
     var n = Symbol('n', 7)
-    var f = faulhaber_s_formula(n, p).simplify
+    var f = faulhaber_s_formula(n, p).simple
     assert_eq(f.numeric, sum_by(1..7, { _**p }))
     printf("F(%d) = %s\n", p, f.pretty)
 }

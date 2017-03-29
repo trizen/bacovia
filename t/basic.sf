@@ -15,7 +15,7 @@ assert_eq(a**b, Power(a, b))
 assert_eq(a * Log(b), Product(Fraction(3, 4), Log(Fraction(5, 6))))
 assert_eq(a * Exp(b), Product(Fraction(3, 4), Exp(Fraction(5, 6))))
 
-assert_eq(Exp(Exp(Log(5))).simplify, Exp(5))
+assert_eq(Exp(Exp(Log(5))).simple, Exp(5))
 
 assert_eq(a / Log(b), Fraction(Fraction(3, 4), Log(Fraction(5, 6))))
 assert_eq(a / Exp(b), Fraction(Fraction(3, 4), Exp(Fraction(5, 6))))
@@ -26,6 +26,6 @@ assert_eq(Exp(b).inv, Exp(Fraction(-5, 6)))
 assert_eq(Log(a)+Log(b), Log(a*b))
 assert_eq(Exp(a)*Exp(b), Exp(a+b))
 
-assert_eq(Exp(Exp(Exp(Log(Log(Log(a)))))).simplify, 3/4)
+assert_eq(Exp(Exp(Exp(Log(Log(Log(a)))))).simple, 3/4)
 
 say "** Test passed!"

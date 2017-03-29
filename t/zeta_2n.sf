@@ -18,7 +18,7 @@ var expressions = [
 
 assert_eq(gather {
     for n in (1..5) {
-        take(zeta_2n(n).simplify.pretty)
+        take(zeta_2n(n).simple.pretty)
     }
 }, expressions)
 

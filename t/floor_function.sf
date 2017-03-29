@@ -12,19 +12,19 @@ assert_eq(my_floor(13.1).numeric.round(-50), 13)
 assert_eq(my_floor(13.5).numeric.round(-50), 13)
 assert_eq(my_floor(13.9).numeric.round(-50), 13)
 
-assert_eq(my_floor(13.1).simplify.numeric.round(-50), 13)
-assert_eq(my_floor(13.5).simplify.numeric.round(-50), 13)
-assert_eq(my_floor(13.9).simplify.numeric.round(-50), 13)
+assert_eq(my_floor(13.1).simple.numeric.round(-50), 13)
+assert_eq(my_floor(13.5).simple.numeric.round(-50), 13)
+assert_eq(my_floor(13.9).simple.numeric.round(-50), 13)
 
 assert_eq(my_floor(43.999).numeric.round(-50), 43)
 assert_eq(my_floor(-123.12).numeric.round(-50), -124)
 assert_eq(my_floor(-129.999).numeric.round(-50), -130)
 
-assert_eq(my_floor(43.999).simplify.numeric.round(-50), 43)
-assert_eq(my_floor(-123.12).simplify.numeric.round(-50), -124)
-assert_eq(my_floor(-129.999).simplify.numeric.round(-50), -130)
+assert_eq(my_floor(43.999).simple.numeric.round(-50), 43)
+assert_eq(my_floor(-123.12).simple.numeric.round(-50), -124)
+assert_eq(my_floor(-129.999).simple.numeric.round(-50), -130)
 
-assert_eq(my_floor(Symbol('x', 43.999)).simplify.numeric.round(-50), 43)
-assert_eq(my_floor(Symbol('x', -123.12)).simplify.numeric.round(-50), -124)
+assert_eq(my_floor(Symbol('x', 43.999)).simple.numeric.round(-50), 43)
+assert_eq(my_floor(Symbol('x', -123.12)).simple.numeric.round(-50), -124)
 
 say "** Test passed!"
