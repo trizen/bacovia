@@ -52,12 +52,17 @@ class Fraction(num, den) {
     }
 
     method **(Number o) {
-        if (o < 0) {
-            var a = o.abs
-            Fraction(den**a, num**a)
+        if (o.is_int) {
+            if (o < 0) {
+                var a = o.abs
+                Fraction(den**a, num**a)
+            }
+            else {
+                Fraction(num**o, den**o)
+            }
         }
         else {
-            Fraction(num**o, den**o)
+            Power(self, o)
         }
     }
 
