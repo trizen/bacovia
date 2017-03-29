@@ -6,7 +6,7 @@ class Exp(v) {
     }
 
     method /(Exp o) {
-        Exp(v + o.v.neg)
+        Exp(v - o.v)
     }
 
     method **(Object o) {
