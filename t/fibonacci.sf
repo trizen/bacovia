@@ -12,7 +12,6 @@ func fibonacci(n) {
 
 for n in (1..5) {
     var f = fibonacci(n)
-    say f.pretty
     assert_eq(f.numeric.round(-20), n.fib)
 }
 
