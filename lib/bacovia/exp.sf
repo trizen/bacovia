@@ -21,10 +21,10 @@ class Exp(v) {
                 # Identity: exp(log(a) * b) = a^b
                 if (a.kind_of(Product) && (a.values.len == 2)) {
                     var (x, y) = a.values...
-                    if (x.class == :Log) {
+                    if (x.kind_of(Log)) {
                         take(Power(x.v, y).alternatives...)
                     }
-                    elsif(y.class == :Log) {
+                    elsif(y.kind_of(Log)) {
                         take(Power(y.v, x).alternatives...)
                     }
                 }

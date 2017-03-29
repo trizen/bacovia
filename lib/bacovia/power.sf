@@ -56,6 +56,11 @@ class Power(v, n) {
                     take(a)
                 }
 
+                # Identity: (a/b)^x = a^x / b^x
+                if (a.kind_of(Fraction)) {
+                    take(a.num**b / a.den**b)
+                }
+
                 # Identity: x^2 = x*x
                 #~ if (b == 2) {
                     #~ take(a * a)

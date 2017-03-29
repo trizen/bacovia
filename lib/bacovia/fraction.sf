@@ -55,20 +55,20 @@ class Fraction(num, den) {
         )
     }
 
-    method **(Number o) {
-        if (o.is_int) {
-            if (o < 0) {
-                var a = o.abs
-                Fraction(den**a, num**a)
-            }
-            else {
-                Fraction(num**o, den**o)
-            }
-        }
-        else {
-            Power(self, o)
-        }
-    }
+    #~ method **(Number o) {
+        #~ if (o.is_int) {
+            #~ if (o < 0) {
+                #~ var a = o.abs
+                #~ Fraction(den**a, num**a)
+            #~ }
+            #~ else {
+                #~ Fraction(num**o, den**o)
+            #~ }
+        #~ }
+        #~ else {
+            #~ Power(self, o)
+        #~ }
+    #~ }
 
     method ==(Fraction o) {
         (o.num == num) &&
