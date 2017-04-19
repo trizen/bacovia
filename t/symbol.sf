@@ -6,7 +6,7 @@ var x = Symbol('x')
 var y = Symbol('y')
 
 assert_eq(x+y, Sum(Symbol('x'), Symbol('y')))
-assert_eq(x-y, Sum(Symbol('x'), Product(-1, Symbol('y'))))
+assert_eq(x-y, Difference(Symbol('x'), Symbol('y')))
 assert_eq(x*y, Product(x, y))
 assert_eq(x/y, Fraction(x, y))
 

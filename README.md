@@ -11,7 +11,7 @@ var x = Symbol('x')
 var y = Symbol('y')
 
 say x+y               #=> Sum(Symbol('x'), Symbol('y'))
-say x-y               #=> Sum(Symbol('x'), Product(-1, Symbol('y')))
+say x-y               #=> Difference(Symbol('x'), Symbol('y'))
 say x*y               #=> Product(Symbol('x'), Symbol('y'))
 say x/y               #=> Fraction(Symbol('x'), Symbol('y'))
 
@@ -41,7 +41,7 @@ for n in (0..3) {
     prod *= Exp(Fraction(1, n!))
 }
 say prod                    #=> Product(Fraction(1, 1), Exp(Fraction(1, 1)), Exp(Fraction(1, 1)), Exp(Fraction(1, 2)), Exp(Fraction(1, 6)))
-say prod.numeric            #=> 14.39191609514989
+say prod.numeric            #=> 14.39191609514989...
 
 
 say "\n=> Alternative representations:"
@@ -59,6 +59,10 @@ Represents a symbolic value. Optionally, it can have a numeric value.
 #### # `Fraction(numerator, denominator)`
 
 Represents a symbolic fraction.
+
+#### # `Difference(minuend, subtrahend)`
+
+Represents a symbolic difference.
 
 #### # `Power(base, power)`
 

@@ -49,7 +49,7 @@ class Sum(*values) {
     method alternatives() is cached {
         gather {
             values.map{.alternatives}.cartesian { |v|
-                take (
+                take(
                     v.group_by {
                         .class
                     }.values.map {

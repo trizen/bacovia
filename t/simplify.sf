@@ -6,10 +6,10 @@ var a = cos(Log(Symbol('x'))).simple
 var b = sin(Log(Symbol('x'))).simple
 
 assert_eq(a, Fraction(Sum(Power(Symbol('x'), -1i), Power(Symbol('x'), 1i)), 2))
-assert_eq(b, Fraction(Sum(Power(Symbol('x'), 1i), Product(Power(Symbol('x'), -1i), -1)), 2i))
+assert_eq(b, Fraction(Difference(Power(Symbol('x'), 1i), Power(Symbol('x'), -1i)), 2i))
 
 assert_eq(a.pretty, '((x^-i + x^i) / 2)')
-assert_eq(b.pretty, '((x^i + (x^-i * -1)) / (2i))')
+assert_eq(b.pretty, '((x^i - x^-i) / (2i))')
 
 var c = simple(Exp(Log(Symbol('x')) * Exp(Symbol('y'))))
 assert_eq(c, Power(Symbol('x'), Exp(Symbol('y'))))
@@ -28,8 +28,8 @@ assert_eq(f, Power(Symbol('x'), -Log(Symbol('y'))))
 assert_eq(f.pretty, 'x^log((1 / y))')
 
 var f = simple(Exp(Log(Symbol('x')) * -Exp(Symbol('y'))))
-assert_eq(f, Power(Symbol('x'), Product(Exp(Symbol('y')), -1)))
-assert_eq(f.pretty, 'x^(exp(y) * -1)')  # this may change in the future
+assert_eq(f, Power(Symbol('x'), Difference(0, Exp(Symbol('y')))))
+assert_eq(f.pretty, 'x^(-exp(y))')
 
 assert_eq(Power(3, Fraction(1, 2)).pretty, '3^(1 / 2)')
 

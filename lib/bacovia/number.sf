@@ -3,147 +3,31 @@
 class Number {
 
     # Addition
-    method +(Product o) {
-        o + self
-    }
-
-    method +(Sum o) {
-        o + self
-    }
-
-    method +(Power o) {
-        o + self
-    }
-
-    method +(Log o) {
-        o + self
-    }
-
-    method +(Symbol o) {
-        o + self
-    }
-
-    method +(Fraction o) {
-        o + self
-    }
-
-    method +(Exp o) {
-        o + self
+    method +(Bacovia o) {
+        #o + self
+        Sum(self, o)
     }
 
     # Subtraction
-    method -(Fraction o) {
-        o.neg + self
-    }
-
-    method -(Product o) {
-        o.neg + self
-    }
-
-    method -(Symbol o) {
-        o.neg + self
-    }
-
-    method -(Sum o) {
-        o.neg + self
-    }
-
-    method -(Log o) {
-        o.neg + self
-    }
-
-    method -(Power o) {
-        o.neg + self
-    }
-
-    method -(Exp o) {
-        o.neg + self
+    method -(Bacovia o) {
+        #o.neg + self
+        Difference(self, o)
     }
 
     # Multiplication
-    method *(Fraction o) {
-        o * self
-    }
-
-    method *(Log o) {
-        o * self
-    }
-
-    method *(Product o) {
-        o * self
-    }
-
-    method *(Power o) {
-        o * self
-    }
-
-    method *(Symbol o) {
-        o * self
-    }
-
-    method *(Sum o) {
-        o * self
-    }
-
-    method *(Exp o) {
-        o * self
+    method *(Bacovia o) {
+        #o * self
+        Product(self, o)
     }
 
     # Division
-    method /(Sum o) {
-        o.inv * self
-    }
-
-    method /(Product o) {
-        o.inv * self
-    }
-
-    method /(Fraction o) {
-        o.inv * self
-    }
-
-    method /(Log o) {
-        o.inv * self
-    }
-
-    method /(Power o) {
-        o.inv * self
-    }
-
-    method /(Symbol o) {
-        o.inv * self
-    }
-
-    method /(Exp o) {
-        o.inv * self
+    method /(Bacovia o) {
+        #o.inv * self
+        Fraction(self, o)
     }
 
     # Exponentiation
-    method **(Fraction o) {
-        Power(self, o)
-    }
-
-    method **(Sum o) {
-        Power(self, o)
-    }
-
-    method **(Product o) {
-        Power(self, o)
-    }
-
-    method **(Log o) {
-        Power(self, o)
-    }
-
-    method **(Symbol o) {
-        Power(self, o)
-    }
-
-    method **(Exp o) {
-        Power(self, o)
-    }
-
-    method **(Power o) {
+    method **(Bacovia o) {
         Power(self, o)
     }
 
@@ -161,6 +45,8 @@ class Number {
     }
 
     method pretty {
-        ["#{self}", self.is_int ? () : "(#{self.as_rat})"].min_by { .len }
+        with (self.is_rat ? self.as_rat : self.to_s) { |str|
+            (str.contains(%r"\di\z|/")) ? "(#{str})" : str
+        }
     }
 }

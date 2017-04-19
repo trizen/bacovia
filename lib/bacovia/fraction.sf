@@ -2,73 +2,67 @@
 
 class Fraction(num, den) {
 
-    method +(Number o) {
-        self + Fraction(o, 1)
-    }
+    subset T1 < Difference, Number;
 
-    method +(Fraction o) {
+    method +(Fraction y) {
         Fraction(
-            num*o.den + o.num*den,
-            den*o.den
+            (num * y.den) + (den * y.num),
+            (den * y.den)
         )
     }
 
-    #~ method +(Object o) {
-        #~ self + Fraction(o, 1)
-    #~ }
-
-    method -(Number o) {
-        self + o.neg
+    method +(y < T1) {
+        Fraction(
+            num + (y * den),
+            den
+        )
     }
 
-    method -(Fraction o) {
-        self + o.neg
+    method -(Fraction y) {
+        Fraction(
+            (num * y.den) - (den * y.num),
+            (den * y.den)
+        )
     }
 
-    #~ method -(Object o) {
-        #~ self - Fraction(o, 1)
-    #~ }
-
-    method *(Number o) {
-        Fraction(num*o, den)
+    method -(y < T1) {
+        Fraction(
+            num - (y * den),
+            den
+        )
     }
 
-    method *(Fraction o) {
-        Fraction(num*o.num, den*o.den)
+    method *(Fraction y) {
+        Fraction(
+            num * y.num,
+            den * y.den,
+        )
     }
 
-    #~ method *(Object o) {
-        #~ self * Fraction(o, 1)
-    #~ }
+    method *(y < T1) {
+        Fraction(
+            num * y,
+            den
+        )
+    }
 
-    method /(Number o) {
+    method /(Fraction y) {
+        Fraction(
+            num * y.den,
+            den * y.num
+        )
+    }
+
+    method /(y < T1) {
         Fraction(
             num,
-            den * o
+            den * y
         )
     }
 
-    method /(Fraction o) {
-        Fraction(
-            num * o.den,
-            den * o.num,
-        )
+    method inv {
+        Fraction(den, num)
     }
-
-    #~ method **(Number o) {
-        #~ if (o.is_int) {
-            #~ if (o < 0) {
-                #~ var a = o.abs
-                #~ Fraction(den**a, num**a)
-            #~ }
-            #~ else {
-                #~ Fraction(num**o, den**o)
-            #~ }
-        #~ }
-        #~ else {
-            #~ Power(self, o)
-        #~ }
-    #~ }
 
     method ==(Fraction o) {
         (o.num == num) &&
@@ -77,19 +71,6 @@ class Fraction(num, den) {
 
     method ==(_) {
         false
-    }
-
-    method inv {
-        if (num == 1) {
-            den
-        }
-        else {
-            Fraction(den, num)
-        }
-    }
-
-    method neg {
-        Fraction(num.neg, den)
     }
 
     method alternatives() is cached {
@@ -101,6 +82,10 @@ class Fraction(num, den) {
 
                 if (b == 1) {
                     take(a)
+                }
+
+                if (a == 1) {
+                    take(b.inv)
                 }
             }
         }.uniq_by { .to_s }

@@ -1,0 +1,118 @@
+#!/usr/bin/ruby
+
+class Difference(minuend, subtrahend) {
+
+    subset T1 < Fraction, Number;
+
+    #
+    ## (a-b) + (x-y) = (a+x) - (b+y)
+    #
+
+    method +(Difference y) {
+        Difference(
+            minuend    + y.minuend,
+            subtrahend + y.subtrahend
+        )
+    }
+
+    method +(y < T1) {
+        Difference(
+            minuend + y,
+            subtrahend
+        )
+    }
+
+    #
+    ## (a-b) - (x-y) = (a+y) - (b+x)
+    #
+
+    method -(Difference y) {
+        Difference(
+            minuend    + y.subtrahend,
+            subtrahend + y.minuend
+        )
+    }
+
+    method -(y < T1) {
+        Difference(
+            minuend,
+            subtrahend + y
+        )
+    }
+
+    #
+    ## (a-b) * (x-y) = (a*x + b*y) - (b*x + a*y)
+    #
+
+    method *(Difference y) {
+        Difference(
+            (minuend    * y.minuend) + (subtrahend * y.subtrahend),
+            (subtrahend * y.minuend) + (minuend    * y.subtrahend)
+        )
+    }
+
+    method *(y < T1) {
+        Difference(
+            minuend    * y,
+            subtrahend * y
+        )
+    }
+
+    method neg {
+        Difference(
+            subtrahend,
+            minuend
+        )
+    }
+
+    method ==(Difference y) {
+        (minuend == y.minuend) &&
+            (subtrahend == y.subtrahend)
+    }
+
+    method ==(_) {
+        false
+    }
+
+    method numeric {
+        minuend.numeric - subtrahend.numeric
+    }
+
+    method pretty {
+        var a = minuend.pretty
+        var b = subtrahend.pretty
+
+        if (a == '0') {
+            return "(-#{b})"
+        }
+
+        if (b == '0') {
+            return a
+        }
+
+        "(#{a} - #{b})"
+    }
+
+    method to_s {
+        "Difference(#{minuend}, #{subtrahend})"
+    }
+
+    method alternatives {
+        var a = minuend.alternatives
+        var b = subtrahend.alternatives
+
+        gather {
+            for x,y in (a ~X b) {
+                take(Difference(x, y))
+
+                if (y == 0) {
+                    take(x)
+                }
+
+                if (x == 0) {
+                    take(y.neg)
+                }
+            }
+        }.uniq_by { .to_s }
+    }
+}

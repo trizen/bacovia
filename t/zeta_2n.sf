@@ -8,20 +8,17 @@ func zeta_2n(n) {
     (-1)**(n+1) * bernoulli(2*n) * τ**(2*n) / ((2*n)! * 2)
 }
 
-var expressions = [
-    '((1 / 4) * (-4) * (1/6) * log(-1)^2)',
-    '((1 / 48) * (16) * (1/30) * log(-1)^4)',
-    '((1 / 1440) * (-64) * (1/42) * log(-1)^6)',
-    '((1 / 80640) * (256) * (1/30) * log(-1)^8)',
-    '((1 / 7257600) * (-1024) * (5/66) * log(-1)^10)',
-]
+var output = <<'EOT'.lines
+zeta(2) = ((1/24) * (-4 * log(-1)^2))
+zeta(4) = ((1/1440) * (16 * log(-1)^4))
+zeta(6) = ((1/60480) * (-64 * log(-1)^6))
+zeta(8) = ((1/2419200) * (256 * log(-1)^8))
+zeta(10) = ((1/95800320) * (-1024 * log(-1)^10))
+EOT
 
 assert_eq(gather {
     for n in (1..5) {
         var z = zeta_2n(n).simple.pretty
-        say "zeta(#{2*n}) = #{z}"
-        take(z)
+        say take("zeta(#{2*n}) = #{z}")
     }
-}, expressions)
-
-say "** Test passed!"
+}, output)

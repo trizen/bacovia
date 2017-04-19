@@ -9,23 +9,23 @@ var f = Fraction(13, 17)
 var p = Product(3, 4, 5)
 var s = Sum(3, 4, 5)
 
-assert_eq(a**a, Power(3, Product(Power(3, 5), 5)))
-assert_eq(e**e, Exp(Product(Exp(5), 5)))
+assert_eq(a**a, Power(3, Product(5, Power(3, 5))))
+assert_eq(e**e, Exp(Product(5, Exp(5))))
 assert_eq(l**l, Power(l, l))
 assert_eq(f**f, Power(f, f))
 
-assert_eq(a**e, Power(3, Product(Exp(5), 5)))
-assert_eq(a**l, Power(3, Product(Log(2), 5)))
+assert_eq(a**e, Power(3, Product(5, Exp(5))))
+assert_eq(a**l, Power(3, Product(5, Log(2))))
 
 assert_eq(a.numeric, 243)
-assert_eq(e**l, Exp(Product(Log(2), 5)))
+assert_eq(e**l, Exp(Product(5, Log(2))))
 
 assert_eq(p**3, Product(27, 64, 125))
 assert_eq(s**3, Power(s, 3))
 
-assert_eq(-Exp(5),       Product(-1, Exp(5)))
-assert_eq(-Power(2, 3),  Product(-1, Power(2, 3)))
-assert_eq(5/Power(2, 3), Product(Power(2, -3), 5))
+assert_eq(-Exp(5),       Difference(0, Exp(5)))
+assert_eq(-Power(2, 3),  Difference(0, Power(2, 3)))
+assert_eq(5/Power(2, 3), Fraction(5, Power(2, 3)))
 
 #assert_eq(a*a, Power(3, 10))           # not implemented
 assert_eq(a+a, Sum(a, a))
