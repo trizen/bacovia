@@ -48,7 +48,7 @@ class Product(*values) {
     # TODO: remove pairs of (x, 1/x)
     method alternatives() is cached {
         gather {
-            values.map{.alternatives}.cartesian { |v|
+            values.map{.alternatives}.cartesian { |*v|
                 take(
                     v.group_by {
                         .class
