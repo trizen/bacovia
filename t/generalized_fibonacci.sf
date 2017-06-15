@@ -1,0 +1,17 @@
+#!/usr/bin/ruby
+
+# Runtime: 2.587s
+
+include('../lib/bacovia.sf')
+
+func fibonacci(t, n) {
+    var a = Power(n**2 + 4, Fraction(1, 2))
+    var b = Fraction(a + Power(Power(a, 2) - 4, Fraction(1, 2)), 2)
+    Fraction(Power(b, t) - Power(-b, -t), a)
+}
+
+say var a = fibonacci(Symbol('n', 12), 1).simple.pretty
+say var b = fibonacci(Symbol('n', 12), Symbol('m')).simple.pretty
+
+assert_eq(a, '((((5^(1/2) + (5 - 4)^(1/2))/2)^n - (-((5^(1/2) + (5 - 4)^(1/2))/2))^(-n))/5^(1/2))')
+assert_eq(b, '(((((4 + m^2)^(1/2) + ((4 + m^2)^1 - 4)^(1/2))/2)^n - (-(((4 + m^2)^(1/2) + ((4 + m^2)^1 - 4)^(1/2))/2))^(-n))/(4 + m^2)^(1/2))')
