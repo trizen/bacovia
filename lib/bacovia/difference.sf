@@ -2,6 +2,8 @@
 
 class Difference(minuend, subtrahend) {
 
+    has cache = Hash()
+
     subset T1 < Fraction, Number;
 
     #
@@ -58,6 +60,20 @@ class Difference(minuend, subtrahend) {
         )
     }
 
+    #~ method /(Difference y) {
+        #~ Fraction(
+            #~ (minuend   * y.minuend) - (minuend      * y.subtrahend) - (subtrahend   * y.minuend) + (subtrahend * y.subtrahend),
+            #~ (y.minuend * y.minuend) + (y.subtrahend * y.subtrahend) - (y.subtrahend * y.minuend) - (y.minuend  * y.subtrahend)
+        #~ )
+    #~ }
+
+    #~ method /(y < T1) {
+        #~ Fraction(
+            #~ minuend*y - subtrahend*y,
+            #~ y * y
+        #~ )
+    #~ }
+
     method neg {
         Difference(
             subtrahend,
@@ -75,44 +91,50 @@ class Difference(minuend, subtrahend) {
     }
 
     method numeric {
-        minuend.numeric - subtrahend.numeric
+        cache{:num} := (minuend.numeric - subtrahend.numeric)
     }
 
     method pretty {
-        var a = minuend.pretty
-        var b = subtrahend.pretty
+        cache{:pretty} := do {
+            var a = minuend.pretty
+            var b = subtrahend.pretty
 
-        if (a == '0') {
-            return "(-#{b})"
+            if (a == '0') {
+                "(-#{b})"
+            }
+            elsif (b == '0') {
+                a
+            }
+            else {
+                "(#{a} - #{b})"
+            }
         }
-
-        if (b == '0') {
-            return a
-        }
-
-        "(#{a} - #{b})"
     }
 
     method to_s {
-        "Difference(#{minuend}, #{subtrahend})"
+        cache{:str} := "Difference(#{minuend}, #{subtrahend})"
     }
 
     method alternatives {
-        var a = minuend.alternatives
-        var b = subtrahend.alternatives
+        cache{:alt} := do {
+            var a = minuend.alternatives
+            var b = subtrahend.alternatives
 
-        gather {
-            for x,y in (a ~X b) {
-                take(Difference(x, y))
+            gather {
+                for x,y in (a ~X b) {
 
-                if (y == 0) {
-                    take(x)
+                    take(x - y)
+                    take(Difference(x, y))
+
+                    if (y == 0) {
+                        take(x)
+                    }
+
+                    if (x == 0) {
+                        take(y.neg)
+                    }
                 }
-
-                if (x == 0) {
-                    take(y.neg)
-                }
-            }
-        }.uniq_by { .to_s }
+            }.uniq_by { .to_s }
+        }
     }
 }

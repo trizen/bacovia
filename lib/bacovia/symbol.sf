@@ -2,6 +2,8 @@
 
 class Symbol(name, value=nil) {
 
+    has cache = Hash()
+
     method ==(Symbol o) {
         name == o.name
     }
@@ -19,6 +21,6 @@ class Symbol(name, value=nil) {
     }
 
     method to_s {
-        defined(value) ? "Symbol('#{name}', #{value})" : "Symbol('#{name}')"
+        cache{:str} := (defined(value) ? "Symbol('#{name}', #{value})" : "Symbol('#{name}')")
     }
 }

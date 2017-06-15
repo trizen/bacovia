@@ -30,4 +30,10 @@ assert_eq(5/Power(2, 3), Fraction(5, Power(2, 3)))
 #assert_eq(a*a, Power(3, 10))           # not implemented
 assert_eq(a+a, Sum(a, a))
 
+do {
+    var a = Power(5, Fraction(1, 2));
+    var p = Power(a, Fraction(a, Log(a))).simple.pretty
+    assert_eq(p, 'exp(5^(1/2))')
+}
+
 say "** Test passed!"

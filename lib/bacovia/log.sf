@@ -2,6 +2,8 @@
 
 class Log(v) {
 
+    has cache = Hash()
+
     method +(Log o) {
         Log(v * o.v)
     }
@@ -10,16 +12,18 @@ class Log(v) {
         Log(v / o.v)
     }
 
-    method alternatives() is cached {
-        gather {
-            for a in (v.alternatives) {
-                take(Log(a))
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                for a in (v.alternatives) {
+                    take(Log(a))
 
-                if (a.kind_of(Exp)) {
-                    take(a.v)
+                    if (a.kind_of(Exp)) {
+                        take(a.v)
+                    }
                 }
-            }
-        }.uniq_by { .to_s }
+            }.uniq_by { .to_s }
+        }
     }
 
     method ==(Log o) {
@@ -31,18 +35,18 @@ class Log(v) {
     }
 
     method neg {
-        Log(v.inv)
+        cache{:neg} := Log(v.inv)
     }
 
     method numeric {
-        v.numeric.log
+        cache{:num} := v.numeric.log
     }
 
-    method pretty() is cached {
-        "log(#{v.pretty})"
+    method pretty() {
+        cache{:pretty} := "log(#{v.pretty})"
     }
 
     method to_s {
-        "Log(#{v})"
+        cache{:str} := "Log(#{v})"
     }
 }
