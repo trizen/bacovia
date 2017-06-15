@@ -4,6 +4,7 @@ include('../lib/bacovia.sf')
 
 var a = Sum(3, 4, 6)**5
 
-assert_eq(a.alternatives, [Exp(Product(Log(13), 5)), Power(13, 5), 371293])
+#assert_eq(a.alternatives, [Exp(Product(Log(13), 5)), Power(13, 5), 371293])
+assert_eq(a.alternatives, [371293, Power(13, 5)])
 
 say "** Test passed!"

@@ -16,9 +16,9 @@ class Number {
         Sum(self, o)
     }
 
-    method -(Fraction o) {
-        Fraction(self, 1) - o
-    }
+    #~ method -(Fraction o) {
+        #~ Fraction(self, 1) - o
+    #~ }
 
     method -(Difference o) {
         Difference(self, 0) - o
@@ -47,6 +47,10 @@ class Number {
     method /(Fraction o) {
         Fraction(self, 1) / o
     }
+
+    #~ method /(Difference o) {
+        #~ Difference(self, 0) / o
+    #~ }
 
     # Division
     method /(Bacovia o) {

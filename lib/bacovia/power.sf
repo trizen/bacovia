@@ -45,9 +45,15 @@ class Power(v, n) {
         cache{:alt} := do {
             gather {
                 for a,b in (v.alternatives ~X n.alternatives) {
-                    take(Exp(Log(a) * b))
-                    take(Power(a, b))
+
                     take(a ** b)
+                    take(Power(a, b))
+                    #take(Exp(Log(a) * b))
+
+                    # Identity: x^0 = 1
+                    if (b == 0) {
+                        take(1)
+                    }
 
                     # Identity: 1^x = 1
                     if (a == 1) {

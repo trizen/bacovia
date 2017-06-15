@@ -45,7 +45,7 @@ class Product(*values) {
     }
 
     method neg {
-        cache{:neg} := Product(-1, values...)
+        cache{:neg} := Difference(0, self)
     }
 
     # TODO: remove pairs of (x, 1/x)

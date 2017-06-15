@@ -79,16 +79,14 @@ class Fraction(num, den) {
         cache{:alt} := do {
             gather {
                 for a,b in (num.alternatives ~X den.alternatives) {
-                    take(a/b)
-                    take(Fraction(a, b))
-                    #take(Product(a, Exp(Log(b).neg)))
-
                     if (b == 1) {
                         take(a)
                     }
 
-                    if (a == 1) {
-                        take(b.inv)
+                    take(Fraction(a, b))
+
+                    if (a.kind_of(Number) && b.kind_of(Number)) {
+                        take(a / b)
                     }
                 }
             }.uniq_by { .to_s }
@@ -100,7 +98,7 @@ class Fraction(num, den) {
     }
 
     method pretty() {
-        cache{:pretty} := "(#{num.pretty} / #{den.pretty})"
+        cache{:pretty} := "(#{num.pretty}/#{den.pretty})"
     }
 
     method to_s {

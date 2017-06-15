@@ -34,11 +34,11 @@ assert_eq(asech(sech(k)) -> numeric.round(-20), 0.5)
 
 var n = Symbol('n', 42)
 
-assert_eq(cos(Log(n)) -> simple.pretty, '((n^-i + n^i) / 2)')
-assert_eq(sin(Log(n)) -> simple.pretty, '((n^i - n^-i) / (2i))')
+assert_eq(cos(Log(n)) -> simple.pretty, '((n^-i + n^i)/2)')
+assert_eq(sin(Log(n)) -> simple.pretty, '((n^i - n^-i)/(2i))')
 
-assert_eq(cosh(Log(n)) -> simple.pretty, '((1 + n^2) / (2 * n))')
-assert_eq(sinh(Log(n)) -> simple.pretty, '((n^2 - 1) / (2 * n))')
+assert_eq(cosh(Log(n)) -> simple.pretty, '((1 + n^2)/(2 * n))')
+assert_eq(sinh(Log(n)) -> simple.pretty, '((n^2 - 1)/(2 * n))')
 
 assert_eq(asinh(sinh(n)) -> numeric, 42)
 assert_eq(acosh(cosh(n)) -> numeric, 42)

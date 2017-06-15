@@ -122,16 +122,14 @@ class Difference(minuend, subtrahend) {
 
             gather {
                 for x,y in (a ~X b) {
-
-                    take(x - y)
-                    take(Difference(x, y))
-
                     if (y == 0) {
                         take(x)
                     }
-
-                    if (x == 0) {
+                    elsif (x == 0) {
                         take(y.neg)
+                    }
+                    else {
+                        take(Difference(x, y))
                     }
                 }
             }.uniq_by { .to_s }
