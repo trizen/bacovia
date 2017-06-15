@@ -2,6 +2,8 @@
 
 class Power(v, n) {
 
+    has cache = Hash()
+
     method **(Object o) {
         Power(v, n * o)
         #Power(self, o)
@@ -36,75 +38,94 @@ class Power(v, n) {
     #~ }
 
     method inv {
-        Power(v, n.neg)
+        cache{:inv} := Power(v, n.neg)
     }
 
-    method alternatives() is cached {
-        gather {
-            for a,b in (v.alternatives ~X n.alternatives) {
-                take(Exp(Log(a) * b))
-                take(Power(a, b))
-                take(a ** b)
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                for a,b in (v.alternatives ~X n.alternatives) {
 
-                # Identity: 1^x = 1
-                if (a == 1) {
-                    take(1)
+                    take(a ** b)
+                    take(Power(a, b))
+                    #take(Exp(Log(a) * b))
+
+                    # Identity: x^0 = 1
+                    if (b == 0) {
+                        take(1)
+                    }
+
+                    # Identity: 1^x = 1
+                    if (a == 1) {
+                        take(1)
+                    }
+
+                    # Identity: x^1 = x
+                    if (b == 1) {
+                        take(a)
+                    }
+
+                    # Identity: (a/b)^x = a^x / b^x
+                    if (a.kind_of(Fraction)) {
+                        take(a.num**b / a.den**b)
+                    }
+
+                    # Identity: x^2 = x*x
+                    #~ if (b == 2) {
+                        #~ take(a * a)
+                    #~ }
+
+                    # Identity: x^log(y) = y^log(x)
+                    if (b.kind_of(Log)) {
+                        take(b.v**Log(a))
+                    }
+
+                    # Identity: exp(x)^log(y) = y^x
+                    if (a.kind_of(Exp) && b.kind_of(Log)) {
+                        take(b.v**a.v)
+                    }
+
+                    # Identity: exp(x)^y = exp(y*x)
+                    if (a.kind_of(Exp)) {
+                        take(Exp(a.v * b))
+                    }
+
+                    # Identity: x^(y/log(x)) = exp(y)
+                    if (b.kind_of(Fraction) && b.den.kind_of(Log) && (a == b.den.v)) {
+                        if (b.num.kind_of(Log)) {
+                            take(b.num.v)
+                        }
+                        else {
+                            take(Exp(b.num).alternatives...)
+                        }
+                    }
                 }
-
-                # Identity: x^1 = x
-                if (b == 1) {
-                    take(a)
-                }
-
-                # Identity: (a/b)^x = a^x / b^x
-                if (a.kind_of(Fraction)) {
-                    take(a.num**b / a.den**b)
-                }
-
-                # Identity: x^2 = x*x
-                #~ if (b == 2) {
-                    #~ take(a * a)
-                #~ }
-
-                # Identity: x^log(y) = y^log(x)
-                if (b.kind_of(Log)) {
-                    take(b.v**Log(a))
-                }
-
-                # Identity: exp(x)^log(y) = y^x
-                if (a.kind_of(Exp) && b.kind_of(Log)) {
-                    take(b.v**a.v)
-                }
-
-                # Identity: exp(x)^y = exp(y*x)
-                if (a.kind_of(Exp)) {
-                    take(Exp(a.v * b))
-                }
-
-            }
-        }.uniq_by { .to_s }
+            }.uniq_by { .to_s }
+        }
     }
 
     method numeric {
-        v.numeric ** n.numeric
+        cache{:num} := (v.numeric ** n.numeric)
     }
 
-    method pretty() is cached {
-        var base = v.pretty
-        var pow = n.pretty
+    method pretty() {
+        cache{:pretty} := do {
+            var base = v.pretty
+            var pow = n.pretty
 
-        if (base.begins_with('-')) {
-            "(#{base})^#{pow}"
-        }
-        elsif (v.kind_of(Power)) {
-            "(#{base})^#{pow}"
-        }
-        else {
-            "#{base}^#{pow}"
+            if (base.begins_with('-')) {
+                "(#{base})^#{pow}"
+            }
+            elsif (v.kind_of(Power)) {
+                "(#{base})^#{pow}"
+            }
+            else {
+                "#{base}^#{pow}"
+            }
         }
     }
 
     method to_s {
-        "Power(#{v}, #{n})"
+        cache{:str} := "Power(#{v}, #{n})"
     }
 }

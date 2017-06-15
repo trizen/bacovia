@@ -2,10 +2,26 @@
 
 class Number {
 
+    method +(Fraction o) {
+        Fraction(self, 1) + o
+    }
+
+    method +(Difference o) {
+        Difference(self, 0) + o
+    }
+
     # Addition
     method +(Bacovia o) {
         #o + self
         Sum(self, o)
+    }
+
+    #~ method -(Fraction o) {
+        #~ Fraction(self, 1) - o
+    #~ }
+
+    method -(Difference o) {
+        Difference(self, 0) - o
     }
 
     # Subtraction
@@ -14,11 +30,27 @@ class Number {
         Difference(self, o)
     }
 
+    method *(Fraction o) {
+        Fraction(self, 1) * o
+    }
+
+    method *(Difference o) {
+        Difference(self, 0) * o
+    }
+
     # Multiplication
     method *(Bacovia o) {
         #o * self
         Product(self, o)
     }
+
+    method /(Fraction o) {
+        Fraction(self, 1) / o
+    }
+
+    #~ method /(Difference o) {
+        #~ Difference(self, 0) / o
+    #~ }
 
     # Division
     method /(Bacovia o) {

@@ -2,6 +2,8 @@
 
 class Fraction(num, den) {
 
+    has cache = Hash()
+
     subset T1 < Difference, Number;
 
     method +(Fraction y) {
@@ -61,7 +63,7 @@ class Fraction(num, den) {
     }
 
     method inv {
-        Fraction(den, num)
+        cache{:inv} := Fraction(den, num)
     }
 
     method ==(Fraction o) {
@@ -73,33 +75,33 @@ class Fraction(num, den) {
         false
     }
 
-    method alternatives() is cached {
-        gather {
-            for a,b in (num.alternatives ~X den.alternatives) {
-                take(a/b)
-                take(Fraction(a, b))
-                #take(Product(a, Exp(Log(b).neg)))
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                for a,b in (num.alternatives ~X den.alternatives) {
+                    if (b == 1) {
+                        take(a)
+                    }
 
-                if (b == 1) {
-                    take(a)
-                }
+                    take(Fraction(a, b))
 
-                if (a == 1) {
-                    take(b.inv)
+                    if (a.kind_of(Number) && b.kind_of(Number)) {
+                        take(a / b)
+                    }
                 }
-            }
-        }.uniq_by { .to_s }
+            }.uniq_by { .to_s }
+        }
     }
 
     method numeric {
-        num.numeric / den.numeric
+        cache{:num} := (num.numeric / den.numeric)
     }
 
-    method pretty() is cached {
-        "(#{num.pretty} / #{den.pretty})"
+    method pretty() {
+        cache{:pretty} := "(#{num.pretty}/#{den.pretty})"
     }
 
     method to_s {
-        "Fraction(#{num}, #{den})"
+        cache{:str} := "Fraction(#{num}, #{den})"
     }
 }

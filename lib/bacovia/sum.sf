@@ -1,18 +1,21 @@
 #!/usr/bin/ruby
 
 class Sum(*values) {
+
+    has cache = Hash()
+
     method -(Sum o) {
         Sum(values..., o.values.map{.neg}...)
     }
 
     method -(Object o) {
         var copy = [values...]
-        #~ if (copy.remove_first(o)) {
-            #~ Sum(copy...)
-        #~ }
-        #~ else {
+        if (copy.remove_first(o)) {
+            Sum(copy...)
+        }
+        else {
             Sum(copy..., o.neg)
-        #~ }
+        }
     }
 
     method +(Sum o) {
@@ -21,12 +24,12 @@ class Sum(*values) {
 
     method +(Object o) {
         var copy = [values...]
-        #~ if (copy.remove_first(o.neg)) {
-            #~ Sum(copy...)
-        #~ }
-        #~ else {
+        if (copy.remove_first(o.neg)) {
+            Sum(copy...)
+        }
+        else {
             Sum(copy..., o)
-        #~ }
+        }
     }
 
     #~ method *(Sum o) {
@@ -46,18 +49,20 @@ class Sum(*values) {
     }
 
     # TODO: remove pairs of (x, -x)
-    method alternatives() is cached {
-        gather {
-            values.map{.alternatives}.cartesian { |*v|
-                take(
-                    v.group_by {
-                        .class
-                    }.values.map {
-                        .reduce('+')
-                    }.sort_by { .class }.reduce('+')
-                )
-            }
-        }.uniq_by { .to_s }
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                values.map{.alternatives}.cartesian { |*v|
+                    take(
+                        v.group_by {
+                            .class
+                        }.values.map {
+                            .reduce('+')
+                        }.sort_by { .class }.reduce('+')
+                    )
+                }
+            }.uniq_by { .to_s }
+        }
     }
 
     method ==(Sum o) {
@@ -69,19 +74,20 @@ class Sum(*values) {
     }
 
     method neg {
-        Sum(values.map{ .neg }...)
+        cache{:neg} := Sum(values.map{ .neg }...)
     }
 
     method numeric {
-        values.map { .numeric }.sum
+        cache{:num} := values.map { .numeric }.sum
     }
 
-    method pretty() is cached {
-        values || return '0'
-        '(' + values.map{.pretty}.join(' + ') + ')'
+    method pretty() {
+        cache{:pretty} := (
+            values ? ('(' + values.map{.pretty}.join(' + ') + ')') : '0'
+        )
     }
 
     method to_s {
-        "Sum(#{values.join(', ')})"
+        cache{:str} := "Sum(#{values.join(', ')})"
     }
 }

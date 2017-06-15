@@ -1,6 +1,9 @@
 #!/usr/bin/ruby
 
 class Exp(v) {
+
+    has cache = Hash()
+
     method *(Exp o) {
         Exp(v + o.v)
     }
@@ -13,26 +16,28 @@ class Exp(v) {
         Exp(v * o)
     }
 
-    method alternatives() is cached {
-        gather {
-            for a in (v.alternatives) {
-                take(Exp(a))
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                for a in (v.alternatives) {
+                    take(Exp(a))
 
-                # Identity: exp(log(a) * b) = a^b
-                if (a.kind_of(Product) && (a.values.len == 2)) {
-                    var (x, y) = a.values...
-                    if (x.kind_of(Log)) {
-                        take(Power(x.v, y).alternatives...)
+                    # Identity: exp(log(a) * b) = a^b
+                    if (a.kind_of(Product) && (a.values.len == 2)) {
+                        var (x, y) = a.values...
+                        if (x.kind_of(Log)) {
+                            take(Power(x.v, y).alternatives...)
+                        }
+                        elsif(y.kind_of(Log)) {
+                            take(Power(y.v, x).alternatives...)
+                        }
                     }
-                    elsif(y.kind_of(Log)) {
-                        take(Power(y.v, x).alternatives...)
+                    elsif (a.kind_of(Log)) {
+                        take(a.v)
                     }
                 }
-                elsif (a.kind_of(Log)) {
-                    take(a.v)
-                }
-            }
-        }.uniq_by { .to_s }
+            }.uniq_by { .to_s }
+        }
     }
 
     method ==(Exp o) {
@@ -44,18 +49,18 @@ class Exp(v) {
     }
 
     method inv {
-        Exp(v.neg)
+        cache{:inv} := Exp(v.neg)
     }
 
     method numeric {
-        v.numeric.exp
+        cache{:num} := v.numeric.exp
     }
 
-    method pretty() is cached {
-        "exp(#{v.pretty})"
+    method pretty() {
+        cache{:pretty} := "exp(#{v.pretty})"
     }
 
     method to_s {
-        "Exp(#{v})"
+        cache{:str} := "Exp(#{v})"
     }
 }

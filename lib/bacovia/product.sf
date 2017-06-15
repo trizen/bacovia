@@ -1,6 +1,9 @@
 #!/usr/bin/ruby
 
 class Product(*values) {
+
+    has cache = Hash()
+
     method *(Product o) {
         Product(values..., o.values...)
     }
@@ -42,22 +45,24 @@ class Product(*values) {
     }
 
     method neg {
-        Product(-1, values...)
+        cache{:neg} := Difference(0, self)
     }
 
     # TODO: remove pairs of (x, 1/x)
-    method alternatives() is cached {
-        gather {
-            values.map{.alternatives}.cartesian { |*v|
-                take(
-                    v.group_by {
-                        .class
-                    }.values.map {
-                        .reduce('*')
-                    }.sort_by { .class }.reduce('*')
-                )
-            }
-        }.uniq_by { .to_s }
+    method alternatives() {
+        cache{:alt} := do {
+            gather {
+                values.map{.alternatives}.cartesian { |*v|
+                    take(
+                        v.group_by {
+                            .class
+                        }.values.map {
+                            .reduce('*')
+                        }.sort_by { .class }.reduce('*')
+                    )
+                }
+            }.uniq_by { .to_s }
+        }
     }
 
     method ==(Product o) {
@@ -69,19 +74,20 @@ class Product(*values) {
     }
 
     method inv {
-        Product(values.map { .inv }...)
+        cache{:inv} := Product(values.map { .inv }...)
     }
 
     method numeric {
-        values.map { .numeric }.prod
+        cache{:num} := values.map { .numeric }.prod
     }
 
-    method pretty() is cached {
-        values || return '1'
-        '(' + values.map{.pretty}.join(' * ') + ')'
+    method pretty {
+        cache{:pretty} := (
+            values ? ('(' + values.map{.pretty}.join(' * ') + ')') : '1'
+        )
     }
 
     method to_s {
-        "Product(#{values.join(', ')})"
+        cache{:str} := "Product(#{values.join(', ')})"
     }
 }
