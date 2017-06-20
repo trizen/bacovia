@@ -58,10 +58,12 @@ class Product(*values) {
                             .class
                         }.values.map {
                             .reduce('*')
-                        }.sort_by { .class }.reduce('*')
+                        }.sort_by {
+                            .class
+                        }.grep{ _ != 1 }.reduce('*') \\ 1
                     )
                 }
-            }.uniq_by { .to_s }
+            }.uniq_by { .to_s } || [1]
         }
     }
 
