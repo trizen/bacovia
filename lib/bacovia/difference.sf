@@ -128,6 +128,9 @@ class Difference(minuend, subtrahend) {
                     elsif (x == 0) {
                         take(y.neg)
                     }
+                    elsif (x == y) {
+                        take(0)
+                    }
                     else {
                         take(Difference(x, y))
                     }

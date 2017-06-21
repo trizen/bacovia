@@ -83,6 +83,10 @@ class Fraction(num, den) {
                         take(a)
                     }
 
+                    if (a == b) {
+                        take(1)
+                    }
+
                     take(Fraction(a, b))
 
                     if (a.kind_of(Number) && b.kind_of(Number)) {
