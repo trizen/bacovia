@@ -16,8 +16,8 @@ for n in (1..5) {
 }
 
 assert_eq(
-    fibonacci(Symbol(:n)).pretty,
-    '((((1/2) + (5^(1/2)/2))^n - ((2/(1 + 5^(1/2)))^n * ((exp((-i * (log(-1) * -i * n))) + exp((i * (log(-1) * -i * n))))/2)))/5^(1/2))'
+    fibonacci(Symbol(:n)).simple.pretty,
+    '((((5^(1/2) + 1)/2)^n - (((exp((-i * (log(-1) * -i * n))) + exp((i * (log(-1) * -i * n))))/2) * (2/(1 + 5^(1/2)))^n))/5^(1/2))'
 )
 
-say "** Test passed!"
+say fibonacci(Symbol(:n)).simple.pretty
