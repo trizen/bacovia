@@ -39,7 +39,7 @@ class Log(v) {
     }
 
     method numeric {
-        cache{:num} := v.numeric.log
+        v.numeric.log
     }
 
     method pretty() {

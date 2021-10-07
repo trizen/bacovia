@@ -1,74 +1,97 @@
 #!/usr/bin/ruby
 
-class Fraction(num, den) {
+class Fraction {
 
-    has cache = Hash()
+    Perl.eval(['unshift(@', __CLASS__, '::ISA, "', Bacovia, '");'].join)
+
+    __CLASS__.undef_method('pow')
+    __CLASS__.undef_method('**')
 
     subset T1 < Difference, Number;
 
     method +(Fraction y) {
         Fraction(
-            (num * y.den) + (den * y.num),
-            (den * y.den)
+            (self.num * y.den) + (self.den * y.num),
+            (self.den * y.den)
         )
     }
 
     method +(y < T1) {
         Fraction(
-            num + (y * den),
-            den
+            self.num + (y * self.den),
+            self.den
         )
+    }
+
+    method +(Bacovia y) {
+        Sum(self, y)
     }
 
     method -(Fraction y) {
         Fraction(
-            (num * y.den) - (den * y.num),
-            (den * y.den)
+            (self.num * y.den) - (self.den * y.num),
+            (self.den * y.den)
         )
     }
 
     method -(y < T1) {
         Fraction(
-            num - (y * den),
-            den
+            self.num - (y * self.den),
+            self.den
         )
+    }
+
+    method -(Bacovia y) {
+        Difference(self, y)
     }
 
     method *(Fraction y) {
         Fraction(
-            num * y.num,
-            den * y.den,
+            self.num * y.num,
+            self.den * y.den,
         )
     }
 
     method *(y < T1) {
         Fraction(
-            num * y,
-            den
+            self.num * y,
+            self.den
         )
+    }
+
+    method *(Bacovia y) {
+        Product(self, y)
     }
 
     method /(Fraction y) {
         Fraction(
-            num * y.den,
-            den * y.num
+            self.num * y.den,
+            self.den * y.num
         )
     }
 
     method /(y < T1) {
         Fraction(
-            num,
-            den * y
+            self.num,
+            self.den * y
         )
     }
 
+    method /(Bacovia y) {
+        Fraction(self, y)
+    }
+
     method inv {
-        cache{:inv} := Fraction(den, num)
+        Fraction(self.den, self.num)
+    }
+
+    method neg {
+        Fraction(self.num.neg, self.den)
     }
 
     method ==(Fraction o) {
-        (o.num == num) &&
-        (o.den == den)
+        (o.num == self.num) &&
+        (o.den == self.den)
     }
 
     method ==(_) {
@@ -76,36 +99,34 @@ class Fraction(num, den) {
     }
 
     method alternatives() {
-        cache{:alt} := do {
-            gather {
-                for a,b in (num.alternatives ~X den.alternatives) {
-                    if (b == 1) {
-                        take(a)
-                    }
-
-                    if (a == b) {
-                        take(1)
-                    }
-
-                    take(Fraction(a, b))
-
-                    if (a.kind_of(Number) && b.kind_of(Number)) {
-                        take(a / b)
-                    }
+        gather {
+            for a,b in (self.num.alternatives ~X self.den.alternatives) {
+                if (b == 1) {
+                    take(a)
                 }
-            }.uniq_by { .to_s }
-        }
+
+                if (a == b) {
+                    take(1)
+                }
+
+                take(Fraction(a, b))
+
+                if (a.kind_of(Number) && b.kind_of(Number)) {
+                    take(a / b)
+                }
+            }
+        }.uniq_by { .to_s }
     }
 
     method numeric {
-        cache{:num} := (num.numeric / den.numeric)
+        self.num.numeric / self.den.numeric
     }
 
     method pretty() {
-        cache{:pretty} := "(#{num.pretty}/#{den.pretty})"
+        "(#{self.num.pretty}/#{self.den.pretty})"
     }
 
     method to_s {
-        cache{:str} := "Fraction(#{num}, #{den})"
+        "Fraction(#{self.num}, #{self.den})"
     }
 }

@@ -80,7 +80,7 @@ class Sum(*values) {
     }
 
     method numeric {
-        cache{:num} := values.map { .numeric }.sum
+        values.map { .numeric }.sum
     }
 
     method pretty() {

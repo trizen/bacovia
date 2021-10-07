@@ -162,23 +162,33 @@ class Bacovia {
         Sum(self, o)
     }
 
+    __CLASS__.alias_method('+', 'add')
+
     method -(o < T1) {
         Difference(self, o)
     }
+
+    __CLASS__.alias_method('-', 'sub')
 
     method *(o < T1) {
         Product(self, o)
         #Fraction(self, o.inv)
     }
 
+    __CLASS__.alias_method('*', 'mul')
+
     method /(o < T1) {
         #Product(self, o.inv)
         Fraction(self, o)
     }
 
+    __CLASS__.alias_method('/', 'div')
+
     method **(o < T1) {
         Power(self, o)
     }
+
+    __CLASS__.alias_method('**', 'pow')
 
     method neg {
         Difference(0, self)
@@ -194,7 +204,8 @@ class Bacovia {
 
     method simple {
         self.alternatives.min_by { |e|
-            e.kind_of(Number) ? 0 : e.pretty.len
+            #e.kind_of(Number) ? 0 : e.pretty.len
+            (e.class == "Number") ? 0 : e.pretty.len
         }
     }
 

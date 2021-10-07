@@ -105,7 +105,7 @@ class Power(v, n) {
     }
 
     method numeric {
-        cache{:num} := (v.numeric ** n.numeric)
+        v.numeric ** n.numeric
     }
 
     method pretty() {

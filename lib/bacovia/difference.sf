@@ -91,7 +91,7 @@ class Difference(minuend, subtrahend) {
     }
 
     method numeric {
-        cache{:num} := (minuend.numeric - subtrahend.numeric)
+        minuend.numeric - subtrahend.numeric
     }
 
     method pretty {

@@ -80,7 +80,7 @@ class Product(*values) {
     }
 
     method numeric {
-        cache{:num} := values.map { .numeric }.prod
+        values.map { .numeric }.prod
     }
 
     method pretty {
